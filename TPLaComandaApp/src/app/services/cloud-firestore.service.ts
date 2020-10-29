@@ -40,7 +40,7 @@ export class CloudFirestoreService {
 
 
   /* Retorna Url de imagen */
-  async AgregarImagen(file: File){
+  async AgregarImagen(file){
     let urlretorno: string;
     const path = 'imagenes/' + Date.now() + Math.random() * 10;
 

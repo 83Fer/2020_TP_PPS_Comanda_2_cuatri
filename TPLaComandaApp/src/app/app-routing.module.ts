@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'orden',
     loadChildren: () => import('./pages/orden/orden.module').then( m => m.OrdenPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   }
 
 ];

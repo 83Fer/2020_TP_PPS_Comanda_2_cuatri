@@ -5,6 +5,7 @@ import { UsuarioModel } from '../../models/usuario-model';
 import { NavController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
+    private router: Router,
     public alertController: AlertController) {
     this.form = new FormGroup({
       mail: new FormControl(null, [
@@ -69,6 +71,10 @@ export class LoginPage implements OnInit {
   LoginUser(usuario: UsuarioModel){
     this.usuario = usuario;
     this.login();
+  }
+
+  IrRegistro(){
+    this.router.navigate(['registro']);
   }
 
 }
