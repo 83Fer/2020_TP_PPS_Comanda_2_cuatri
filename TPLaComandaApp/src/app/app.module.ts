@@ -21,6 +21,9 @@ import { firebaseConfig } from '../config/firebase.config';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-scanner/ngx';
 
+// Capacitor
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,7 +41,6 @@ import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-
     StatusBar,
     SplashScreen,
     BarcodeScanner,
-    DocumentScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

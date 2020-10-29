@@ -18,31 +18,31 @@ export class HomeService {
       route: '/solicita-mesa',
       title: 'Solicita tu mesa', // cliente y anonimo
       icon: 'restaurant',
-      class: this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
-      style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-      visible: this.solicitudAceptada
-    },
-    {
-      route: '/scan-mesa',
-      title: 'Escanear mesa asignada', // cliente y anonimo
-      icon: 'qr-code-outline',
-      class: this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
+      class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
       visible: !this.solicitudAceptada
+    },
+    {
+      route: '/scanner-mesa',
+      title: 'Escanear mesa asignada', // cliente y anonimo
+      icon: 'qr-code-outline',
+      class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
+      style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
+      visible: this.solicitudAceptada
     },
     {
       route: '/consulta-mozo',
       title: 'Consulta al mozo', // cliente y anonimo
       icon: 'chatbubbles',
-      class: this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
+      class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-      visible: !this.solicitudAceptada
+      visible: this.solicitudAceptada
     },
     {
       route: '/reserva',
       title: 'Hacé tu reserva', // cliente
       icon: 'calendar',
-      class: this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
+      class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
       visible: this.perfilAnonimo
     },
@@ -50,7 +50,7 @@ export class HomeService {
       route: '/delivery',
       title: 'Hacé tu pedido y te lo llevamos', // cliente
       icon: 'bicycle',
-      class: this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
+      class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
       visible: this.perfilAnonimo
     }
