@@ -14,7 +14,24 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'pedido',
+    loadChildren: () => import('./pages/pedido/pedido.module').then( m => m.PedidoPageModule)
+  },
+  {
+    path: 'scanner-mesa',
+    loadChildren: () => import('./pages/scanner-mesa/scanner-mesa.module').then( m => m.ScannerMesaPageModule)
+  },
+  {
+    path: 'concepto/:id',
+    loadChildren: () => import('./pages/concepto/concepto.module').then( m => m.ConceptoPageModule)
+  },
+  {
+    path: 'orden',
+    loadChildren: () => import('./pages/orden/orden.module').then( m => m.OrdenPageModule)
   }
+
 ];
 
 @NgModule({

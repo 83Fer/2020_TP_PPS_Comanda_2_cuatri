@@ -9,7 +9,7 @@ import { HomeService } from 'src/app/services/home.service';
 })
 export class HomePage {
 
-  constructor(private navCtrl: NavController, public homeService: HomeService) {}
+  constructor(private navCtrl: NavController, public homeService: HomeService) {homeService.getMenuCliente(); }
 
   showPage(url: string) {
     this.navCtrl.navigateRoot(url);
