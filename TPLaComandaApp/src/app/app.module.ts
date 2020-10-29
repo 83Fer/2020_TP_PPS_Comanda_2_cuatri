@@ -18,8 +18,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { firebaseConfig } from '../config/firebase.config';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-scanner/ngx';
 
 // Capacitor
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -34,7 +32,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,    
+    AngularFireStorageModule,
     ComponentsModule
   ],
   providers: [
