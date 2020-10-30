@@ -1,6 +1,6 @@
 <h1>2020 - 2 cuatrimestre - PPS -- La Comanda</h1>
 
-<strong>Tecnologias con la que vamos a trabjar y planificación de tareas:</strong> <br>
+<strong>Tecnologias con la que vamos a trabajar y planificación de tareas:</strong> <br>
 1_Para el desarrollo de la aplicación se va a utilizar Ionic 5+.<br>
 2_Para el versionado vamos a trabajar con github.<br>
 3_Para el mantenimiento de información vamos a usar firebase.<br>
