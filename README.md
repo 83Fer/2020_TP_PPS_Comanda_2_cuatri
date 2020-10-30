@@ -4,7 +4,7 @@
 1_Para el desarrollo de la aplicación se va a utilizar Ionic 5+.<br>
 2_Para el versionado vamos a trabajar con github.<br>
 3_Para el mantenimiento de información vamos a usar firebase.<br>
-4_Las tareas a realizar se van a dividir por semana, trabajando por modulos para luego acoplorlos al circuito.<br><br>
+4_Las tareas a realizar se van a dividir por semana, trabajando por modulos para luego acoplarlos al circuito.<br><br>
 
 <h3>Iteración 1 25/10 - 31/10</h3>
 
