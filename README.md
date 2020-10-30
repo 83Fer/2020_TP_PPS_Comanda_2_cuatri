@@ -15,4 +15,4 @@
 <strong>Tareas:</strong> Register / Alta de cliente <br><br>
 
 <strong>Nombre:</strong> Emiliano Medina<br>
-<strong>Tareas:</strong> Manejo de permiso de aceptación y notificación por mail al cliente<br><br>
+<strong>Tareas:</strong> Splash animado / Manejo de permiso de aceptación y notificación por mail al cliente<br><br>
