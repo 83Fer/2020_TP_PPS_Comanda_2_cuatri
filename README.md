@@ -4,7 +4,7 @@ Para registrar el <strong>grupo completo</strong> con todos sus integrantes: htt
 
 <br>
 
-Grupos:<br>
+Gruposs:<br>
 <h4>Máximo 3 integrantes</h4>
 <h4>Mínimo 2 integrantes</h4>
 
