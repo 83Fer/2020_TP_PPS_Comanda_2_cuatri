@@ -8,7 +8,7 @@ export class HomeService {
   // propiedades provisoria
   solicitudAceptada = true;
   perfilAnonimo = true;
-  tipoEmpleado = 'mozo';
+  tipoEmpleado = 'metre';
 
   // lista de botones del menu
   listaMenu: Menu[];
@@ -44,7 +44,7 @@ export class HomeService {
       icon: 'calendar',
       class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-      visible: this.perfilAnonimo
+      visible: true
     },
     {
       route: '/delivery',
@@ -52,7 +52,7 @@ export class HomeService {
       icon: 'bicycle',
       class: !this.solicitudAceptada ? 'icon_5px' : 'icon_4px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-      visible: this.perfilAnonimo
+      visible: true
     }
   ];
 
