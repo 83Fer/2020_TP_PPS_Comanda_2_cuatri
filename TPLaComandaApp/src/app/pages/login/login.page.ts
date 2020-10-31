@@ -49,8 +49,21 @@ export class LoginPage implements OnInit {
 
     const result = await this.authService.login(this.usuario);
     if (result) {
-      loading.dismiss();
-      this.navCtrl.navigateRoot('/home', { animated: true });
+      this.authService.ObtenerActual().subscribe(async rta=>{
+        let data = rta.data();
+        if(data.role == "cliente" && !data.aprobado){
+          const alert = await this.alertController.create({
+            message: 'Su cuenta no se encuentra aprobada.',
+            buttons: ['OK'],
+            cssClass: 'alertCustomCss',
+          });
+          await alert.present();
+        }
+        else{
+          this.navCtrl.navigateRoot('/home', { animated: true });
+        }
+      })
+      loading.dismiss();      
     }
     else{
       loading.dismiss();
