@@ -19,7 +19,7 @@ ion-content{
 }
 
   ion-item.inputForm{
-    --background: rgba(var(--ion-color-warning-rgb), 0.86);
+    --background: rgb(45, 87, 36);
     --padding-bottom: 2px;
     --border-radius: 0px;
     ion-label {
@@ -28,7 +28,7 @@ ion-content{
         font-size: 1rem!important;
     }
     ion-input {
-        --color: rgb(48, 107, 0);
+        --color: #fff;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight: bolder;
         font-size: x-large;
@@ -44,7 +44,9 @@ ion-item{
 
 ion-button{
     --background: #062f77;
-    --border-radius: 0%;
+}
+ion-select{
+    color: #fff;
 }
 a{
     color: #fff;

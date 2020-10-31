@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { ClienteModel } from 'src/app/models/cliente-model';
 import { UsuarioModel } from 'src/app/models/usuario-model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,7 +20,6 @@ export class RegistroPage implements OnInit {
   dniString: string;
   tipoRegisto: string;
   fotoSacada;
-  datosQrCargados: boolean = false;
   loading;
   constructor(private router: Router,
               public alertController: AlertController,
@@ -28,6 +27,7 @@ export class RegistroPage implements OnInit {
               private camara: CamaraService,
               private barcodeScanner: BarcodeScanner,
               private loadingCtrl: LoadingController,
+              public toastController: ToastController,
               private cloud: CloudFirestoreService) { 
     this.usuario = new UsuarioModel();
     this.cliente = new ClienteModel();
@@ -55,7 +55,6 @@ export class RegistroPage implements OnInit {
     this.cliente.apellido = listDatos[1];
     this.cliente.nombre = listDatos[2];
     this.cliente.dni = parseInt(listDatos[4]);
-    this.datosQrCargados = true;
   }
 
   async Registrar(){
@@ -66,26 +65,16 @@ export class RegistroPage implements OnInit {
 
     if(this.tipoRegisto){
       if(this.usuario.mail && this.usuario.password && this.fotoSacada){
-        if(this.tipoRegisto=="qr"){
-          if(this.datosQrCargados){
+        if(this.cliente.nombre){                  
+          if(this.tipoRegisto == "anonimo"){
             this.RegistroFirebase(this.usuario);
           }
           else{
-            this.alertError("Debe escanear su dni");
+            this.VerificarCliente();
           }
         }
-        else{          
-          if(this.cliente.nombre){                  
-            if(this.tipoRegisto == "anonimo"){
-              this.RegistroFirebase(this.usuario);
-            }
-            else{
-              this.VerificarCliente();
-            }
-          }
-          else{
-            this.alertError("Complete su nombre");
-          }
+        else{
+          this.alertError("Complete su nombre");
         }
       }
       else{
@@ -119,17 +108,18 @@ export class RegistroPage implements OnInit {
 
   async RegistroFirebase(usuario: UsuarioModel){
     try{
-      await this.auth.RegistrarUsuario(usuario);
+      let userRegistrado = await this.auth.RegistrarUsuario(usuario);
       const response = await fetch(this.fotoSacada);
       const blobImg = await response.blob();
       this.cliente.foto = await this.cloud.AgregarImagen(blobImg);
       if(this.tipoRegisto=="anonimo"){
-        this.AgregarClienteAnonimo(this.cliente);        
+        this.AgregarClienteAnonimo(this.cliente, userRegistrado.user.uid);        
       }
       else{
-        this.AgregarCliente(this.cliente);
+        this.AgregarCliente(this.cliente, userRegistrado.user.uid);
       }
-      this.router.navigate(['home']);
+      this.toastCuentaRegistrada();
+      this.router.navigate(['login']);
     }
     catch(error){
       switch (error.code) {
@@ -164,7 +154,7 @@ export class RegistroPage implements OnInit {
     }
   }
 
-  AgregarCliente(cliente: ClienteModel){
+  AgregarCliente(cliente: ClienteModel, idGenerado: string){
     let clienteAgregar = {
       nombre:cliente.nombre,
       apellido: cliente.apellido,
@@ -172,18 +162,20 @@ export class RegistroPage implements OnInit {
       dni: cliente.dni,
       foto: cliente.foto,
       aprobado: false,
+      email: this.usuario.mail,
     };
-    this.cloud.AgregarConId("usuarios", this.usuario.mail, clienteAgregar);
+    this.cloud.AgregarConId("usuarios", idGenerado, clienteAgregar);
     this.loading.dismiss();
   }
 
-  AgregarClienteAnonimo(cliente: ClienteModel){
+  AgregarClienteAnonimo(cliente: ClienteModel, idGenerado: string){
     let clienteAgregar = {
       nombre:cliente.nombre,
       role: "cliente_anonimo",
-      foto: cliente.foto
+      foto: cliente.foto,
+      email: this.usuario.mail,
     };
-    this.cloud.AgregarConId("usuarios", this.usuario.mail, clienteAgregar);
+    this.cloud.AgregarConId("usuarios", idGenerado, clienteAgregar);
     this.loading.dismiss();
   }
 
@@ -195,7 +187,6 @@ export class RegistroPage implements OnInit {
     this.cliente.nombre = null;
     this.cliente.apellido = null;
     this.fotoSacada = null;
-    this.datosQrCargados = false;
   }
 
   IrLogin(){
@@ -221,6 +212,16 @@ export class RegistroPage implements OnInit {
       cssClass: 'alertCustomCss',
     });
     await alert.present();
+  }
+
+  async toastCuentaRegistrada() {
+    const toast = await this.toastController.create({
+      message: 'Su cuenta ha sido registrada.',
+      duration: 3000,
+      position: "bottom",
+      color: "primary"
+    });
+    toast.present();
   }
 
 }
