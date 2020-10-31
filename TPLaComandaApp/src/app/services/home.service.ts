@@ -83,11 +83,19 @@ export class HomeService {
     },
     {
       route: '/encuesta',
-      title: 'Lista de pedidos', // todos menos el mozo
+      title: 'Lista de pedidos', // todos menos el metre
       icon: 'reader-outline',
       class: 'icon_5px',
       style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-      visible: this.tipoEmpleado !== 'mozo'
+      visible: this.tipoEmpleado !== 'metre'
+    },
+    {
+      route: '/listaMesaAsignadas',
+      title: 'Lista de mesas a asignar', // metre
+      icon: 'reader-outline',
+      class: 'icon_5px',
+      style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
+      visible: this.tipoEmpleado === 'metre'
     },
     {
       route: '/encuesta',
