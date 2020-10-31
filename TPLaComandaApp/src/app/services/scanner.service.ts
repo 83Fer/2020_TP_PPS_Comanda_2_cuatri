@@ -13,8 +13,7 @@ export class ScannerService {
   async scannerMesa(){
     this.barcodeScanner.scan().then(async barcodeData => {
       if (!barcodeData.cancelled) {
-        console.log(`---${barcodeData.text}-----`);
-        // logica para saber si tiene la mesa asignada
+        return barcodeData.text;
       }
      }).catch(err => {
          console.log('Error', err);

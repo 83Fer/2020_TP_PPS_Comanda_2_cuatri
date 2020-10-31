@@ -4,6 +4,13 @@
       <strong>Hola xxxx.</strong><br>
       ¿Qué querés hacer?
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()"
+                  color="danger">
+                  Salir
+                  <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
