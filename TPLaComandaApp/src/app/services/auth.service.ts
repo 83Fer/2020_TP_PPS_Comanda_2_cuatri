@@ -36,8 +36,9 @@ export class AuthService {
 
   ObtenerActual(){
     // return this.ngFireAuth.auth.currentUser;
-    let mailUser = this.ngFireAuth.auth.currentUser.email;
-    return this.cloud.ObtenerUno("usuarios", mailUser);    
+    //  let mailUser = this.ngFireAuth.auth.currentUser.email;
+    let idUser = this.ngFireAuth.auth.currentUser.uid;
+    return this.cloud.ObtenerUno("usuarios", idUser);    
   }
 
   RegistrarUsuario(usuario: UsuarioModel){
