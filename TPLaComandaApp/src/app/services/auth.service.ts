@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { NavController } from '@ionic/angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { UsuarioModel } from '../models/usuario-model';
+import { CloudFirestoreService } from './cloud-firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthService {
   constructor(
               private ngFireAuth: AngularFireAuth,
               private navCtrl: NavController,
+              private cloud: CloudFirestoreService,
               private afs: AngularFirestore
   ) { }
 
@@ -33,7 +35,9 @@ export class AuthService {
   }
 
   ObtenerActual(){
-    return this.ngFireAuth.auth.currentUser;
+    // return this.ngFireAuth.auth.currentUser;
+    let mailUser = this.ngFireAuth.auth.currentUser.email;
+    return this.cloud.ObtenerUno("usuarios", mailUser);    
   }
 
   RegistrarUsuario(usuario: UsuarioModel){
