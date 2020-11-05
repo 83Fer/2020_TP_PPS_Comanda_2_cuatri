@@ -38,6 +38,9 @@ export class ButtonFlotatingComponent implements OnInit {
       case 5:
         this.usuarioModel.mail = 'carlos_mozo@gmail.com';
         break;
+      case 6:
+        this.usuarioModel.mail = 'laura_metre@gmail.com';
+        break;
       default:
         break;
     }

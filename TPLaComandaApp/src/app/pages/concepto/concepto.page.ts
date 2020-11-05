@@ -44,10 +44,11 @@ export class ConceptoPage implements OnInit {
     this.pedidoDetalle.cantidad = this.unidad.toString();
     this.pedidoDetalle.conceptoDocID = this.docID.toString();
     this.pedidoDetalle.conceptoNombre = this.conceptosService.concepto.nombre;
+    this.pedidoDetalle.conceptoCategoria = this.conceptosService.concepto.categoria;
     this.pedidoDetalle.importeUnitario = this.conceptosService.concepto.precio;
     this.pedidoDetalle.importeTotal = this.importeTotal.toString();
     this.pedidoDetalle.tiempo = this.conceptosService.concepto.tiempo;
-    this.pedidoDetalle.estado = 'activo';
+    this.pedidoDetalle.estado = 'Pendiente';
     this.pedidoService.AddDetallePedido(this.pedidoDetalle);
     this.navCtrl.navigateRoot(this.previousurl);
   }
