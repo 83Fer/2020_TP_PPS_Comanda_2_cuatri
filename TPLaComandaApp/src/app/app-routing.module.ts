@@ -38,6 +38,17 @@ const routes: Routes = [
   {
     path: 'solicita-mesa',
     loadChildren: () => import('./pages/scanner-solicitar-mesa/scanner-solicitar-mesa.module').then( m => m.ScannerSolicitarMesaPageModule)
+  },
+  {
+    path: 'lista-pedidos',
+    loadChildren: () => import('./pages/lista-pedidos/lista-pedidos.module').then( m => m.ListaPedidosPageModule)
+  },
+  {
+    path: 'estado-pedido',
+    loadChildren: () => import('./pages/estado-pedido/estado-pedido.module').then( m => m.EstadoPedidoPageModule)
+  },  {
+    path: 'estado-pedido-cliente',
+    loadChildren: () => import('./pages/estado-pedido-cliente/estado-pedido-cliente.module').then( m => m.EstadoPedidoClientePageModule)
   }
 
 

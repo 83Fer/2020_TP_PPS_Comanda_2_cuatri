@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Pedido } from '../models/pedido-model';
 import { PedidoDetalle } from '../models/pedido-detalle-model';
 import { ToastService } from './ui-service.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,24 @@ export class PedidosService {
 
   pedidos: Pedido[] = [];
   pedido: Pedido;
+  PedidosDetalle: PedidoDetalle[] = [];
+  pedidoDetalle: PedidoDetalle;
   totalPedido: number;
 
+  // crear propiedades para user
+
   constructor(
+    private ngFireAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private toastService: ToastService
     ) { }
 
   getPedidos() {
     return this.afs.collection('pedidos').snapshotChanges();
+  }
+
+  getPedido(id) {
+    return this.afs.collection('pedidos').doc(id).snapshotChanges();
   }
 
   createPedido(pedido) {
@@ -32,7 +42,10 @@ export class PedidosService {
   }
 
   public updatePedido(documentId: string, data: any) {
-    return this.afs.collection('pedidos').doc(documentId).set(data);
+    return new Promise( resolve => {
+      this.afs.collection('pedidos').doc(documentId).set(data);
+      resolve(true);
+    });
   }
 
   AddDetallePedido(detalle: PedidoDetalle) {
