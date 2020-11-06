@@ -9,7 +9,7 @@
 <h3>Iteración 1 25/10 - 31/10</h3>
 
 <strong>Nombre:</strong> Fernando Rivara<br>
-<strong>Tareas:</strong> Inicio del proyecto / Login / Dashboard / Menu / Alta de pedido <br><br>
+<strong>Tareas:</strong> Inicio del proyecto / Login / Dashboard / Lista de productos / Alta de pedido <br><br>
 
 <strong>Nombre:</strong> Franco Rojas<br>
 <strong>Tareas:</strong> Register / Alta de cliente <br><br>
