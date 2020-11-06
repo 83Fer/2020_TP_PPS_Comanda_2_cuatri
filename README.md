@@ -20,7 +20,7 @@
 <h3>Iteración 2 31/10 - 07/11</h3>
 
 <strong>Nombre:</strong> Fernando Rivara<br>
-<strong>Tareas:</strong> Confirma pedido (Mozo) / Visualiza los pedidos en los diferentes sectores (empleados) <br>
+<strong>Tareas:</strong> Manejo de perfiles en el Dashboard Confirma pedido (Mozo) / Visualiza los pedidos en los diferentes sectores (empleados) <br>
 / Se realizan los cambios de estados de los pedidos (empleados) / Entrega los platos y bebidas (Mozo) <br><br>
 
 <strong>Nombre:</strong> Franco Rojas<br>
