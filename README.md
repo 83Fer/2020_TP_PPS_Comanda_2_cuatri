@@ -1,5 +1,9 @@
 <h1>2020 - 2 cuatrimestre - PPS -- La Comanda</h1>
 
+<h2>La Comanda</h2>
+
+![icon-comanda](https://user-images.githubusercontent.com/12042953/98424697-44a52900-2071-11eb-8f34-bfc994be0930.jpeg)
+
 <strong>Tecnologias con la que vamos a trabajar y planificación de tareas:</strong> <br>
 1_Para el desarrollo de la aplicación se va a utilizar Ionic 5+.<br>
 2_Para el versionado vamos a trabajar con github.<br>
