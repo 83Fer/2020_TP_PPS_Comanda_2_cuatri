@@ -46,10 +46,15 @@ const routes: Routes = [
   {
     path: 'estado-pedido',
     loadChildren: () => import('./pages/estado-pedido/estado-pedido.module').then( m => m.EstadoPedidoPageModule)
-  },  {
+  },
+  {
     path: 'estado-pedido-cliente',
     loadChildren: () => import('./pages/estado-pedido-cliente/estado-pedido-cliente.module').then( m => m.EstadoPedidoClientePageModule)
-  }
+  },
+  {
+    path:'consulta-mozo',
+    loadChildren: () => import('./pages/consulta-mozo/consulta-mozo.module').then( m => m.ConsultaMozoPageModule)
+  },  
 
 
 ];
