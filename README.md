@@ -19,6 +19,8 @@
 3_Para el mantenimiento de información vamos a usar firebase.<br>
 4_Las tareas a realizar se van a dividir por semana, trabajando por modulos para luego acoplarlos al circuito.<br><br>
 
+<h2>División de tareas</h2>
+
 <h3>Iteración 1 25/10 - 31/10</h3>
 
 <strong>Nombre:</strong> Fernando Rivara<br>
