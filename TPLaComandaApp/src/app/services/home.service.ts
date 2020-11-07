@@ -9,7 +9,7 @@ import { EmpleadoService } from './empleado.service';
 export class HomeService {
 
   // propiedades provisoria
-  solicitudMesaAceptada = false;
+  solicitudMesaAceptada = true;
   perfilAnonimo = true;
   tipoEmpleado = 'metre';
   nombre: string;
@@ -152,7 +152,15 @@ export class HomeService {
         class: 'icon_5px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
         visible: true
-      }
+      },
+      {
+        route: '/consulta-mozo',
+        title: 'Consultas de clientes', // mozo y metre?
+        icon: 'chatbubbles',
+        class: !this.solicitudMesaAceptada ? 'icon_5px' : 'icon_4px',
+        style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
+        visible: this.tipoEmpleado ==='mozo' || this.tipoEmpleado ==='metre'
+      },
     ];
    }
 
