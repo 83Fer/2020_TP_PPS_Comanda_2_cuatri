@@ -51,12 +51,16 @@ export class ScannerSolicitarMesaPage implements OnInit {
   }
 
   VerificarScan(codigo: string){
+    this.errorCodigo = false;
     if(codigo == "solicitar_mesa"){
       let elementoAgregar = {
         nombre: this.nombreUserActual,
       };
       this.cloud.AgregarConId("listaEspera", this.idUsuarioActual, elementoAgregar);
       this.estaEnEspera = true;
+    }
+    else{
+      this.errorCodigo = true;
     }
   }
 
