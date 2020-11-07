@@ -28,14 +28,13 @@ export class ScannerSolicitarMesaPage implements OnInit {
     this.auth.ObtenerActual().subscribe(rta=>{
       this.idUsuarioActual = rta.id;
       this.nombreUserActual = rta.get("nombre");    
-      this.cloud.ObtenerUno("listaEspera", this.idUsuarioActual).subscribe(rtaDos=>{
-        if(rtaDos.exists){
+      this.db.collection("listaEspera").doc(this.idUsuarioActual).snapshotChanges().subscribe(snap=>{
+        if(snap.payload.exists){
           this.estaEnEspera = true;
         }
         else{
           this.estaEnEspera = false;
         }
-        console.log(this.estaEnEspera);
       })
     });    
   }
