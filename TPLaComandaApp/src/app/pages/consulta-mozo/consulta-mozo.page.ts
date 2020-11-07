@@ -20,6 +20,7 @@ export class ConsultaMozoPage implements OnInit {
   mesaElegida: boolean = false;
   todasLasMesas: Array<string>;
   rolUsuario: string;
+  tipoUsuario: string;
   constructor(private auth: AuthService,
               private cloud: CloudFirestoreService,
               private db: AngularFirestore,
@@ -43,6 +44,7 @@ export class ConsultaMozoPage implements OnInit {
       this.idUsuarioActual = rta.id;
       this.nombreUsuarioActual = rta.get("nombre");
       this.rolUsuario = rta.get("role");
+      this.tipoUsuario = rta.get("tipo");
       if(this.rolUsuario=="cliente"||this.rolUsuario=="cliente_anonimo"){
         this.cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
           snap.forEach(rta=>{
@@ -57,7 +59,7 @@ export class ConsultaMozoPage implements OnInit {
           }
         })        
       }
-      else if(this.rolUsuario=="mozo"||this.rolUsuario=="metre"){ // MOZO
+      else if(this.tipoUsuario=="mozo"||this.tipoUsuario=="metre"){ // MOZO
         this.todasLasMesas = [];
         this.cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
           snap.forEach(mesa=>{
@@ -134,6 +136,6 @@ export class ConsultaMozoPage implements OnInit {
 
   Volver(){
     // this.homeService.mostrarMenuUsuario();
-    alert("Cargar: Volver a home");
+    this.router.navigate(['home']);
   }
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar *ngIf="mesaElegida; else noEligioMesa" color="ligth" class="ion-text-center">
       <ion-icon *ngIf="rolUsuario=='cliente'||rolUsuario=='cliente_anonimo'" (click)="Volver()" size="large" slot="start" color="primary" name="arrow-back-circle-outline"></ion-icon>
-      <ion-icon *ngIf="rolUsuario=='mozo'||rolUsuario=='metre'" (click)="CargarUsuario()" size="large" slot="start" color="primary" name="arrow-back-circle-outline"></ion-icon>
+      <ion-icon *ngIf="tipoUsuario=='mozo'||tipoUsuario=='metre'" (click)="CargarUsuario()" size="large" slot="start" color="primary" name="arrow-back-circle-outline"></ion-icon>
       <ion-title color="primary" class="ion-margin-end">
         Mesa: {{nroMesa}}
       </ion-title>
