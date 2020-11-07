@@ -28,8 +28,8 @@ export class ScannerSolicitarMesaPage implements OnInit {
     this.auth.ObtenerActual().subscribe(rta=>{
       this.idUsuarioActual = rta.id;
       this.nombreUserActual = rta.get("nombre");    
-      this.cloud.ObtenerUno("listaEspera", this.idUsuarioActual).subscribe(rta=>{
-        if(rta.exists){
+      this.cloud.ObtenerUno("listaEspera", this.idUsuarioActual).subscribe(rtaDos=>{
+        if(rtaDos.exists){
           this.estaEnEspera = true;
         }
         else{
