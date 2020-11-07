@@ -32,6 +32,9 @@ export class ScannerSolicitarMesaPage implements OnInit {
         if(rta.exists){
           this.estaEnEspera = true;
         }
+        else{
+          this.estaEnEspera = false;
+        }
         console.log(this.estaEnEspera);
       })
     });    
