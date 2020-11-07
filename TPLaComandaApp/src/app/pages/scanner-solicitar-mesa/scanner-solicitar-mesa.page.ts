@@ -55,4 +55,8 @@ export class ScannerSolicitarMesaPage implements OnInit {
     this.cloud.Borrar("lista_espera", this.idElementoAgregado);
     this.router.navigate(['home']);
   }
+
+  Volver(){
+    this.router.navigate(['home']);
+  }
 }
