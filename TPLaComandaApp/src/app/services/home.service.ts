@@ -9,7 +9,7 @@ import { EmpleadoService } from './empleado.service';
 export class HomeService {
 
   // propiedades provisoria
-  solicitudMesaAceptada = true;
+  solicitudMesaAceptada = false;
   perfilAnonimo = true;
   tipoEmpleado = 'metre';
   nombre: string;
