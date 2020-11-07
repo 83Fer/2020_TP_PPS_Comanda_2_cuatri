@@ -25,7 +25,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      timer(100).subscribe(() => { this.showPlash = false; });
+      timer(5000).subscribe(() => { this.showPlash = false; });
     });
   }
 }
