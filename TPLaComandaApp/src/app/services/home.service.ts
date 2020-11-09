@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { AsignarMesaPage } from '../pages/asignar-mesa/asignar-mesa.page';
 
+import { AsignarMesaService } from '../services/asignar-mesa.service';
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
   // propiedades provisoria
-  solicitudAceptada = true;
+  solicitudMesaAceptada = true; // -> cambiar dinamicamente
   perfilAnonimo = true;
   tipoEmpleado = 'metre';
 
@@ -142,8 +144,21 @@ export class HomeService {
     }
   ];
 
-  constructor() {
+  constructor(
+    private asignarMesaService: AsignarMesaService
+  ) {
     console.log('Entra al home');
+    /* Chequear que sea un cliente */
+    /*
+    Auth service -> UID cliente que esta logeado
+     */
+    this.asignarMesaService.listaMesas.subscribe((lista) => {
+      lista.forEach((mesa) => {
+        if(mesa.cliente == uid){
+          this.solicitudMesaAceptada = true;
+        }
+      });
+    });
    }
 
 

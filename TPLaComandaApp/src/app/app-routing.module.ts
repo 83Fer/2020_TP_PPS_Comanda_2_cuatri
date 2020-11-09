@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'solicita-mesa',
     loadChildren: () => import('./pages/scanner-solicitar-mesa/scanner-solicitar-mesa.module').then( m => m.ScannerSolicitarMesaPageModule)
+  },  {
+    path: 'asignar-mesa',
+    loadChildren: () => import('./pages/asignar-mesa/asignar-mesa.module').then( m => m.AsignarMesaPageModule)
   }
+
 
 
 ];
