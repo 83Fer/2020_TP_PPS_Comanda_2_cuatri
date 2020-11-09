@@ -4,6 +4,8 @@ import { ScannerService } from '../../services/scanner.service';
 import { ConceptosService } from '../../services/concepto.service';
 import { PedidosService } from '../../services/pedido.service';
 import { Pedido } from '../../models/pedido-model';
+import { AsignarMesaService } from '../../services/asignar-mesa.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-scanner-mesa',
@@ -21,7 +23,9 @@ export class ScannerMesaPage implements OnInit {
     private navCtrl: NavController,
     private scannerMesaService: ScannerService,
     private conceptosService: ConceptosService,
-    private pedidosService: PedidosService
+    private pedidosService: PedidosService,
+    private asignarMesaService: AsignarMesaService,
+    private authService: AuthService
     ) { }
 
   ngOnInit() {
@@ -32,9 +36,17 @@ export class ScannerMesaPage implements OnInit {
 
   async scannerMesa() {
     // llamo al servicio
-    const result = await this.scannerMesaService.scannerMesa();
-    this.cargarMenu();
-    this.navCtrl.navigateRoot('/pedido');
+    const qrMesa: string = await this.scannerMesaService.scanMesa();
+    const qrEnLista: boolean = await this.asignarMesaService.buscarMesaQR(qrMesa);
+    if(qrEnLista){
+      let clienteUID: string = this.authService.getUIDUserLoggeado();
+      const clienteEnMesa: boolean = await this.asignarMesaService.buscarClienteEnMesa(clienteUID, qrMesa);
+      if(clienteEnMesa){
+        this.asignarMesaService.codigoMesaAsignada = qrMesa;
+        this.cargarMenu();
+        this.navCtrl.navigateRoot('/pedido');
+      }
+    }
   }
 
   volver() {

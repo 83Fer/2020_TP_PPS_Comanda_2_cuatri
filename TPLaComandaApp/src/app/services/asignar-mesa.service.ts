@@ -15,6 +15,7 @@ export class AsignarMesaService {
   listaClientesEspera: Observable<IClienteEsperaId[]>;
   listaMesas: Observable<IMesaID[]>;
 
+  codigoMesaAsignada: string;
   //listaMesasDisponibles: IMesaID[];
   //hayMesasDisponibles: boolean = false;
   //listaClientesEspera: IClienteEsperaId[];
@@ -62,7 +63,8 @@ export class AsignarMesaService {
 
   /*
   public getListaMesasDisponibles(): IMesaID[]{
-    this.traerMesasDisponibles();
+    this.traerMesas();
+
     return this.listaMesasDisponibles;
   }*/
 
@@ -106,5 +108,56 @@ export class AsignarMesaService {
     }
 
     return retorno;
+  }
+
+  public buscarMesaQR(codigoQR: string): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.listaMesas.subscribe((lista) => {
+        let bandera = true;
+        lista.forEach((mesa)=>{
+          if(mesa.codigoqr == codigoQR){
+            bandera = false;
+            resolve(true);
+          }
+        });
+        if(bandera){
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  public buscarClienteEnMesa(clienteUID: string, codigoQR: string): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.listaMesas.subscribe((lista) => {
+        let bandera = true;
+        lista.forEach((mesa)=>{
+          if(mesa.estado !== "libre" && mesa.cliente == clienteUID && mesa.codigoqr == codigoQR){
+            bandera = false;
+            resolve(true);
+          }
+        });
+        if(bandera){
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  public traerString(codigoQR: string): Promise<string>{
+    return new Promise((resolve, reject) => {
+      this.listaMesas.subscribe((lista) => {
+        let bandera = true;
+        lista.forEach((mesa)=>{
+          if(mesa.codigoqr == codigoQR){
+            bandera = false;
+            resolve(mesa.codigoqr);
+          }
+        });
+        if(bandera){
+          resolve("error");
+        }
+      });
+    });
   }
 }

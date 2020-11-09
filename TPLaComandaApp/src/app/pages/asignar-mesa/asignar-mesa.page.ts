@@ -38,6 +38,10 @@ export class AsignarMesaPage implements OnInit {
     this.listaMesas.subscribe((data) => {
       console.log("LISTA MESAS DATA", data);
     });*/
+    /*this.asignarMesaService.buscarMesaQR("mesa006").then((data) =>{
+      console.log("Resultado de buscar mesa: ",data);
+    });*/
+    this.algo();
   }
 
 
@@ -74,4 +78,15 @@ export class AsignarMesaPage implements OnInit {
     await actionSheet.present();
   }
 
+  async algo(){
+    const prueba: boolean = await this.asignarMesaService.buscarMesaQR("mesa005");
+    const qr: string = await this.asignarMesaService.traerString("mesa001");
+    if(prueba){
+      const pruebaDos: boolean = await this.asignarMesaService.buscarClienteEnMesa('prueba001', qr);
+      console.log("Esta el cliente: ", pruebaDos);
+      console.log("mesa encontrada");
+    } else {
+      console.log("mesa no encontrada");
+    }
+  }
 }
