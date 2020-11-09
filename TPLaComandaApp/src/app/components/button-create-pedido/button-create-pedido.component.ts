@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../../services/pedido.service';
 import { ToastService } from '../../services/ui-service.service';
 import { NavController } from '@ionic/angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-button-create-pedido',
@@ -12,15 +13,18 @@ export class ButtonCreatePedidoComponent implements OnInit {
 
   pedido = {
     usuarioDocID: '',
+    usuarioNombre: '',
     mesaDocID: '',
+    mesaNro: '',
     fechaInicio: '',
     fechaFin: '',
-    estado: 'activo',
+    estado: 'Confirmar',
     importeTotal: '',
     detallePedido: []
   };
 
   constructor(
+    private ngFireAuth: AngularFireAuth,
     private toastService: ToastService,
     public pedidosService: PedidosService,
     private navCtrl: NavController
@@ -30,11 +34,13 @@ export class ButtonCreatePedidoComponent implements OnInit {
   }
 
   async enviarPedido() {
-    this.pedido.usuarioDocID = '12312';
+    this.pedido.usuarioDocID = this.ngFireAuth.auth.currentUser.uid;
+    this.pedido.usuarioNombre = 'Juan';
     this.pedido.mesaDocID = '23';
+    this.pedido.mesaNro = '1';
     this.pedido.fechaInicio = new Date().toTimeString();
     this.pedido.fechaFin = '';
-    this.pedido.estado = 'activo';
+    this.pedido.estado = 'Confirmar';
     this.pedido.importeTotal = this.pedidosService.totalPedido.toString();
 
     this.pedido.detallePedido = this.pedidosService.pedido.detallePedido.map((obj) =>
