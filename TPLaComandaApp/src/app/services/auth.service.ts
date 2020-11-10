@@ -56,4 +56,8 @@ export class AuthService {
     // return (await this.auth.currentUser).emailVerified;
   }
 
+  /** Obtiene el UID del usuario que se encuentra loggedo en este momento*/
+  getUIDUserLoggeado(): string{
+    return this.ngFireAuth.auth.currentUser.uid;
+  }
 }

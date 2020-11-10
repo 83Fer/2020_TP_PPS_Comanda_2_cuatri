@@ -20,4 +20,21 @@ export class ScannerService {
      });
   }
 
+  /**
+   * Retorna el código de una mesa dentro de una promesa, siempre que lo que se escanee tenga data en texto
+   */
+  public scanMesa(): Promise<string>{
+    return new Promise((resolve,reject) => {
+      this.barcodeScanner.scan().then((barcodeData) => {
+        if(!barcodeData.cancelled){
+          resolve(barcodeData.text);
+        } else {
+          reject("No hay barcodeData");
+        }
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
 }

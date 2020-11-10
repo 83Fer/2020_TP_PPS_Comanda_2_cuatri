@@ -1,0 +1,41 @@
+<ion-content>
+
+<table>
+  <thead>
+    <tr>
+      <td>CODIGO QR</td>
+      <td>ID</td>
+      <td>CLIENTE</td>
+      <td>ESTADO</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mesa of listaMesas | async">
+      <td>{{mesa.codigoqr}}</td>
+      <td>{{mesa.id}}</td>
+      <td>{{mesa.cliente}}</td>
+      <td>{{mesa.estado}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <td>UID</td>
+      <td>NOMBRE</td>
+      <td>ACCION</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of listaClientesEspera | async">
+      <td>{{cliente.uid}}</td>
+      <td>{{cliente.nombre}}</td>
+      <td>
+        <ion-button (click)="abrirMenu(cliente)">Asignar mesa</ion-button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</ion-content>

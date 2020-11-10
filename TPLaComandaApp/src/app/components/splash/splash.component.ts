@@ -8,14 +8,16 @@ import { Animation, AnimationController } from '@ionic/angular';
 })
 export class SplashComponent implements OnInit {
 
+  /*
   nombreApellido: Animation;
   icono: Animation;
   division: Animation;
-
+  */
   constructor(private animationCtrl: AnimationController) {
   }
 
   ngOnInit() {
+    /*
     this.nombreApellido = this.animationCtrl.create()
       .addElement(document.querySelector('.titulo-pps'))
       .duration(4000)
@@ -58,7 +60,7 @@ export class SplashComponent implements OnInit {
       .addAnimation([this.nombreApellido, this.icono, this.division]);
 
     parent.play();
-
+    */
   }
 
   play(){

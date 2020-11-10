@@ -40,6 +40,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/scanner-solicitar-mesa/scanner-solicitar-mesa.module').then( m => m.ScannerSolicitarMesaPageModule)
   },
   {
+    path: 'asignar-mesa',
+    loadChildren: () => import('./pages/asignar-mesa/asignar-mesa.module').then( m => m.AsignarMesaPageModule)
+  },
+  {
     path: 'lista-pedidos',
     loadChildren: () => import('./pages/lista-pedidos/lista-pedidos.module').then( m => m.ListaPedidosPageModule)
   },
@@ -54,8 +58,10 @@ const routes: Routes = [
   {
     path:'consulta-mozo',
     loadChildren: () => import('./pages/consulta-mozo/consulta-mozo.module').then( m => m.ConsultaMozoPageModule)
-  },  
-
+  },  {
+    path: 'supervisar-clientes',
+    loadChildren: () => import('./pages/supervisar-clientes/supervisar-clientes.module').then( m => m.SupervisarClientesPageModule)
+  },
 
 ];
 

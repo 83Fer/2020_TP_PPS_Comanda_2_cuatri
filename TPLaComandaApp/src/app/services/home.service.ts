@@ -3,13 +3,17 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { EmpleadoService } from './empleado.service';
 
+import { AsignarMesaService } from '../services/asignar-mesa.service';
+import { AuthService } from '../services/auth.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
   // propiedades provisoria
-  solicitudMesaAceptada = true;
+  //solicitudMesaAceptada = true;
+  solicitudMesaAceptada: boolean;
   perfilAnonimo = true;
   tipoEmpleado = 'metre';
   nombre: string;
@@ -26,10 +30,23 @@ export class HomeService {
   constructor(
     private ngFireAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private empleadoService: EmpleadoService) {
-
-      console.log('Entra al home');
-   }
+    private empleadoService: EmpleadoService,
+    private asignarMesaService: AsignarMesaService,
+    private authSerice: AuthService
+  ) {
+    console.log('Entra al home');
+    this.asignarMesaService.getListaMesas().subscribe((lista) =>{
+      let clienteUID: string = this.authSerice.getUIDUserLoggeado();
+      let estaEnMesa: boolean = false;
+      lista.forEach((mesa) =>{
+        if(mesa.cliente == clienteUID && mesa.estado !== "libre"){
+          this.asignarMesaService.codigoMesaAsignada = mesa.id;
+          estaEnMesa = true;
+        }
+      });
+      this.solicitudMesaAceptada = estaEnMesa;
+    });
+  }
 
 
    getMenuCliente() {
