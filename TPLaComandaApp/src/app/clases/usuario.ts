@@ -1,19 +1,11 @@
-export interface IUsuario {
-    apellido: string;
-    aprobado: boolean;
-    dni: number;
-    foto: string;
+export interface IClienteASupervisar {
     nombre: string;
-    role: string;
-}
-
-export interface IUsuarioId extends IUsuario {
-    uid;
-}
-
-export interface IAprobado {
     email: string;
     estado: string;
+}
+
+export interface IClienteASupervisarUID extends IClienteASupervisar {
+    uid;
 }
 
 export interface IClienteEspera {

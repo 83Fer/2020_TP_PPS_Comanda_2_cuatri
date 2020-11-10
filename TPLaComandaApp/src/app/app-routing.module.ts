@@ -58,7 +58,11 @@ const routes: Routes = [
   {
     path:'consulta-mozo',
     loadChildren: () => import('./pages/consulta-mozo/consulta-mozo.module').then( m => m.ConsultaMozoPageModule)
+  },  {
+    path: 'supervisar-clientes',
+    loadChildren: () => import('./pages/supervisar-clientes/supervisar-clientes.module').then( m => m.SupervisarClientesPageModule)
   },
+
 ];
 
 @NgModule({
