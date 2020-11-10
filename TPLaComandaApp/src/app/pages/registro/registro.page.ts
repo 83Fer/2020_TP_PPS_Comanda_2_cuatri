@@ -165,6 +165,11 @@ export class RegistroPage implements OnInit {
       email: this.usuario.mail,
     };
     this.cloud.AgregarConId("usuarios", idGenerado, clienteAgregar);
+    this.cloud.AgregarConId("clientesASupervisar", idGenerado, {
+      nombre: cliente.nombre,
+      email: this.usuario.mail,
+      estado: "esperando"
+    });
     this.loading.dismiss();
   }
 
