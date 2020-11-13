@@ -28,6 +28,7 @@ export class AsignarMesaService {
   ) { 
     this.coleccionListaEspera = dataBase.collection<IClienteEspera>("listaEspera");
     this.coleccionMesa = dataBase.collection<IMesa>("mesas");
+    this.traerMesas();
   }
 
   public traerListaEspera (){

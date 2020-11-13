@@ -28,10 +28,11 @@ export class ScannerMesaPage implements OnInit {
     private authService: AuthService
     ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     // disparar qr
     this.cargarMenu();
-    this.navCtrl.navigateRoot('/pedido');
+    //this.navCtrl.navigateRoot('/pedido');
+    await this.scannerMesa();
   }
 
   async scannerMesa() {
