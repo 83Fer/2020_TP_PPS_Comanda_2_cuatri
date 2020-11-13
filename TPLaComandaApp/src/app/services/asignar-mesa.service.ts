@@ -59,7 +59,7 @@ export class AsignarMesaService {
   */
 
   public getListaMesas(): Observable<IMesaID[]>{
-    this.traerMesas();
+    //this.traerMesas();
     return this.listaMesas;
   }
 

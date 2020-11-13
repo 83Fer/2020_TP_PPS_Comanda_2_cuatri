@@ -17,6 +17,7 @@ export class ScannerSolicitarMesaPage implements OnInit {
   // usuarioActual;  //si necesita guardar algun dato del usuario
   idUsuarioActual: string;
   nombreUserActual: string;
+  roleUserActual: string;
   // idElementoAgregado: string;
   constructor(private barcodeScanner: BarcodeScanner,
               private cloud: CloudFirestoreService,
@@ -27,7 +28,8 @@ export class ScannerSolicitarMesaPage implements OnInit {
   async ngOnInit() {
     this.auth.ObtenerActual().subscribe(rta=>{
       this.idUsuarioActual = rta.id;
-      this.nombreUserActual = rta.get("nombre");    
+      this.nombreUserActual = rta.get("nombre"); 
+      this.roleUserActual = rta.get("role");   
       this.db.collection("listaEspera").doc(this.idUsuarioActual).snapshotChanges().subscribe(snap=>{
         if(snap.payload.exists){
           this.estaEnEspera = true;
@@ -54,6 +56,7 @@ export class ScannerSolicitarMesaPage implements OnInit {
     if(codigo == "solicitar_mesa"){
       let elementoAgregar = {
         nombre: this.nombreUserActual,
+        role: this.roleUserActual
       };
       this.cloud.AgregarConId("listaEspera", this.idUsuarioActual, elementoAgregar);
       this.estaEnEspera = true;
