@@ -30,8 +30,9 @@ export class ScannerMesaPage implements OnInit {
 
   ngOnInit() {
     // disparar qr
-    this.cargarMenu();
-    this.navCtrl.navigateRoot('/pedido');
+    //this.cargarMenu();
+    //this.navCtrl.navigateRoot('/pedido');
+    this.scannerMesa();
   }
 
   async scannerMesa() {
