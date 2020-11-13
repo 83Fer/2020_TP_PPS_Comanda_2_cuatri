@@ -10,13 +10,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./supervisar-clientes.page.scss'],
 })
 export class SupervisarClientesPage implements OnInit {
-  listaClientes: Observable<IClienteASupervisarUID[]>;
+  //listaClientes: Observable<IClienteASupervisarUID[]>;
+  lista: IClienteASupervisarUID[];
+  //bandera: Promise<boolean>;
 
   constructor(
     private supervisarClientesService: SupervisarClientesService,
     private router: Router
   ) {
-    this.listaClientes = this.supervisarClientesService.getListaClientes();
+    this.supervisarClientesService.crearNuevaLista().subscribe((snap)=>{
+      this.lista = [];
+      snap.forEach(element => {
+        if(element.payload.doc.get("estado") == "esperando"){
+          let nuevoCliente: IClienteASupervisarUID = {
+            uid: element.payload.doc.id,
+            nombre: element.payload.doc.get("nombre"),
+            email: element.payload.doc.get("email"),
+            estado: element.payload.doc.get("estado")
+          }
+          this.lista.push(nuevoCliente);
+        }
+      });
+    });
    }
 
   ngOnInit() {
