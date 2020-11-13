@@ -5,6 +5,7 @@ import { EmpleadoService } from './empleado.service';
 
 import { AsignarMesaService } from '../services/asignar-mesa.service';
 import { AuthService } from '../services/auth.service';
+import { CloudFirestoreService } from './cloud-firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,22 +31,36 @@ export class HomeService {
   constructor(
     private ngFireAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private cloud: CloudFirestoreService,
     private empleadoService: EmpleadoService,
     private asignarMesaService: AsignarMesaService,
     private authSerice: AuthService
   ) {
     console.log('Entra al home');
-    this.asignarMesaService.getListaMesas().subscribe((lista) =>{
-      let clienteUID: string = this.authSerice.getUIDUserLoggeado();
-      let estaEnMesa: boolean = false;
-      lista.forEach((mesa) =>{
-        if(mesa.cliente == clienteUID && mesa.estado !== "libre"){
-          this.asignarMesaService.codigoMesaAsignada = mesa.id;
-          estaEnMesa = true;
-        }
-      });
-      this.solicitudMesaAceptada = estaEnMesa;
-    });
+    // this.asignarMesaService.getListaMesas().subscribe((lista) =>{
+      // let clienteUID: string = this.authSerice.getUIDUserLoggeado();
+      // let estaEnMesa: boolean = false;
+      // lista.forEach((mesa) =>{
+      //   if(mesa.cliente == clienteUID && mesa.estado !== "libre"){
+      //     this.asignarMesaService.codigoMesaAsignada = mesa.id;
+      //     estaEnMesa = true;
+      //   }
+      // });
+      // this.solicitudMesaAceptada = estaEnMesa;
+    // });
+    let idUsuario;
+    authSerice.ObtenerActual().subscribe(rta=>{
+      idUsuario = rta.id;
+      this.solicitudMesaAceptada=false;
+      cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
+        snap.forEach(rta=>{
+          if(rta.payload.doc.get("cliente")==idUsuario&& rta.payload.doc.get("estado")=="ocupada"){
+            this.solicitudMesaAceptada=true;
+          }
+        })
+      })
+    })
+
   }
 
 
