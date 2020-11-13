@@ -4,6 +4,7 @@ import { IClienteEspera, IClienteEsperaId } from '../../clases/usuario';
 import { IMesa, IMesaID } from '../../clases/mesa';
 import { Observable } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asignar-mesa',
@@ -18,7 +19,8 @@ export class AsignarMesaPage implements OnInit {
 
   constructor(
     private asignarMesaService: AsignarMesaService,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private router: Router
   ) { 
     this.listaClientesEspera = this.asignarMesaService.getListaClientesEspera();
     this.listaMesas = this.asignarMesaService.getListaMesas();
@@ -41,7 +43,8 @@ export class AsignarMesaPage implements OnInit {
     /*this.asignarMesaService.buscarMesaQR("mesa006").then((data) =>{
       console.log("Resultado de buscar mesa: ",data);
     });*/
-    this.algo();
+    //this.algo();
+    //this.probar();
   }
 
 
@@ -78,6 +81,7 @@ export class AsignarMesaPage implements OnInit {
     await actionSheet.present();
   }
 
+  
   async algo(){
     const prueba: boolean = await this.asignarMesaService.buscarMesaQR("mesa005");
     const qr: string = await this.asignarMesaService.traerString("mesa001");
@@ -88,5 +92,13 @@ export class AsignarMesaPage implements OnInit {
     } else {
       console.log("mesa no encontrada");
     }
+  }
+
+  public probar(){
+    this.asignarMesaService.probar();
+  }
+
+  public irAtras(){
+    this.router.navigateByUrl("/home");
   }
 }

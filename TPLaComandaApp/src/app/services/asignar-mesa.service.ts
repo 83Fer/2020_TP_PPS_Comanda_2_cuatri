@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IClienteEspera, IClienteEsperaId } from '../clases/usuario';
 import { IMesa, IMesaID  } from '../clases/mesa';
+import { rejects } from 'assert';
 
 @Injectable({
   providedIn: 'root'
@@ -110,9 +111,10 @@ export class AsignarMesaService {
     return retorno;
   }
 
-  public buscarMesaQR(codigoQR: string): Promise<boolean>{
-    return new Promise((resolve, reject) => {
-      this.listaMesas.subscribe((lista) => {
+  public async buscarMesaQR(codigoQR: string): Promise<boolean>{
+    let observador: Subscription;
+    const terminado = await new Promise<boolean>((resolve, reject) => {
+      observador = this.listaMesas.subscribe((lista) => {
         let bandera = true;
         lista.forEach((mesa)=>{
           if(mesa.codigoqr == codigoQR){
@@ -125,11 +127,16 @@ export class AsignarMesaService {
         }
       });
     });
+    if(terminado == true || terminado == false){
+      observador.unsubscribe();
+      return terminado;
+    }
   }
 
-  public buscarClienteEnMesa(clienteUID: string, codigoQR: string): Promise<boolean>{
-    return new Promise((resolve, reject) => {
-      this.listaMesas.subscribe((lista) => {
+  public async buscarClienteEnMesa(clienteUID: string, codigoQR: string): Promise<boolean>{
+    let observador: Subscription;
+    const terminado = await new Promise<boolean>((resolve, reject) => {
+      observador = this.listaMesas.subscribe((lista) => {
         let bandera = true;
         lista.forEach((mesa)=>{
           if(mesa.estado !== "libre" && mesa.cliente == clienteUID && mesa.codigoqr == codigoQR){
@@ -142,9 +149,14 @@ export class AsignarMesaService {
         }
       });
     });
+    if(terminado == true || terminado == false){
+      observador.unsubscribe();
+      return terminado;
+    }
   }
 
   public traerString(codigoQR: string): Promise<string>{
+
     return new Promise((resolve, reject) => {
       this.listaMesas.subscribe((lista) => {
         let bandera = true;
@@ -159,5 +171,21 @@ export class AsignarMesaService {
         }
       });
     });
+  }
+
+  async probar(){
+    let datausuario;
+    let observador: Subscription;
+    const promesa = new Promise<boolean>((resolve, reject)=>{
+      observador = this.dataBase.collection('usuarios').doc('yrSjBPQPT1Ztsfb5OvPjUyTFfOm2').valueChanges().subscribe((data) =>{
+        datausuario = data;
+        console.log("En observable", data);
+        resolve(true);
+      });  
+    });
+    if(await promesa == true){
+      observador.unsubscribe();
+      console.log("Data del usuario", datausuario);
+    }
   }
 }
