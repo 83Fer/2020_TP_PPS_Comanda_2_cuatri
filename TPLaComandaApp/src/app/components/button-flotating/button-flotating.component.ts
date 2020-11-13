@@ -24,7 +24,7 @@ export class ButtonFlotatingComponent implements OnInit {
     this.usuarioModel.password = '123456';
     switch (id) {
       case 1:
-        this.usuarioModel.mail = 'admin@gmail.com';
+        this.usuarioModel.mail = 'luis_supervisor@gmail.com';
         break;
       case 2:
         this.usuarioModel.mail = 'rodrigo_bartender@gmail.com';

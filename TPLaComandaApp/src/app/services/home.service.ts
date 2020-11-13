@@ -147,8 +147,8 @@ export class HomeService {
         visible: this.tipoEmpleado !== 'metre'
       },
       {
-        route: '/listaMesaAsignadas',
-        title: 'Lista de mesas a asignar', // metre
+        route: '/asignar-mesa',
+        title: 'Lista de clientes en espera', // metre
         icon: 'reader-outline',
         class: 'icon_5px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
@@ -200,7 +200,7 @@ export class HomeService {
         visible: true
       },
       {
-        route: '/solicitud',
+        route: '/supervisar-clientes',
         title: 'Solicitud de clientes', // Supervisor o dueño
         icon: 'people',
         class: 'icon_5px',

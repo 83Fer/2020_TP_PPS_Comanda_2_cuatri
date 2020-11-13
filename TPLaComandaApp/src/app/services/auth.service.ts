@@ -60,4 +60,6 @@ export class AuthService {
   getUIDUserLoggeado(): string{
     return this.ngFireAuth.auth.currentUser.uid;
   }
+
+  
 }
