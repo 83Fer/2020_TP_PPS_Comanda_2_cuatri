@@ -10,6 +10,7 @@ export interface IClienteASupervisarUID extends IClienteASupervisar {
 
 export interface IClienteEspera {
     nombre: string;
+    role: string;
 }
 
 export interface IClienteEsperaId extends IClienteEspera {

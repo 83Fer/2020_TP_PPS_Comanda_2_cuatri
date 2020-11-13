@@ -36,13 +36,13 @@
 -->
 <ion-grid >
     <ion-row class="tabla">
-      <ion-col size="6" class="celda centrar">UID</ion-col>
-      <ion-col size="6" class="centrar">NOMBRE</ion-col>
+      <ion-col size="6" class="celda centrar">NOMBRE</ion-col>
+      <ion-col size="6" class="centrar">TIPO</ion-col>
     </ion-row>
     <div  *ngFor="let cliente of listaClientesEspera | async">
       <ion-row class="tabla">
-        <ion-col size="6" class="celda">{{cliente.uid}}</ion-col>
-        <ion-col size="6" class="">{{cliente.nombre}}</ion-col>
+        <ion-col size="6" class="celda">{{cliente.nombre}}</ion-col>
+        <ion-col size="6" class="">{{cliente.role}}</ion-col>
       </ion-row>
       <ion-row class="tabla">
         <ion-col size="12" class="">
