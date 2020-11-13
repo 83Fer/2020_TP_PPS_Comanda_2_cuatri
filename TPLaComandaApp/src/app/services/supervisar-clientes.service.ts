@@ -12,6 +12,7 @@ export class SupervisarClientesService {
   coleccionUsuarios: AngularFirestoreCollection;
   coleccionClientes: AngularFirestoreCollection<IClienteASupervisar>;
   listaClientes: Observable<IClienteASupervisarUID[]>;
+  lista: IClienteASupervisarUID[] = [];
 
   constructor(
     private dataBase: AngularFirestore
@@ -23,11 +24,15 @@ export class SupervisarClientesService {
   public traerClientes(){
     this.listaClientes = this.coleccionClientes.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as IClienteASupervisar;
-        const uid = a.payload.doc.id;
-        return {uid, ...data};
+          const data = a.payload.doc.data() as IClienteASupervisar;
+          const uid = a.payload.doc.id;
+          return {uid, ...data};
       }))
     );
+  }
+
+  public crearNuevaLista(){
+    return this.coleccionClientes.snapshotChanges();
   }
 
   public getListaClientes(): Observable<IClienteASupervisarUID[]>{

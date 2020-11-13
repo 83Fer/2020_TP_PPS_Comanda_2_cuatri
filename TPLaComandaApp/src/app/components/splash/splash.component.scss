@@ -72,18 +72,18 @@ ion-content {
 
 
 .puff-in-center {
-	-webkit-animation: puff-in-center 4s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
-	        animation: puff-in-center 4s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+	-webkit-animation: puff-in-center 5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+	        animation: puff-in-center 5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
 }
 
 .wobble-hor-top {
-	-webkit-animation: wobble-hor-top 1s 3 both;
-	        animation: wobble-hor-top 1s 3 both;
+	-webkit-animation: wobble-hor-top 1s 7 both;
+	        animation: wobble-hor-top 1s 7 both;
 }
 
 .slide-in-blurred-bottom {
-	-webkit-animation: slide-in-blurred-bottom 4s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
-	        animation: slide-in-blurred-bottom 4s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+	-webkit-animation: slide-in-blurred-bottom 6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+	        animation: slide-in-blurred-bottom 6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
 }
 
 .customContenedor{
