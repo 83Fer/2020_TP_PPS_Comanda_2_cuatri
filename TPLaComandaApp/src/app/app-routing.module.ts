@@ -62,6 +62,10 @@ const routes: Routes = [
     path: 'supervisar-clientes',
     loadChildren: () => import('./pages/supervisar-clientes/supervisar-clientes.module').then( m => m.SupervisarClientesPageModule)
   },
+  {
+    path: 'detalle-cuenta',
+    loadChildren: () => import('./pages/detalle-cuenta/detalle-cuenta.module').then( m => m.DetalleCuentaPageModule)
+  },
 
 ];
 
