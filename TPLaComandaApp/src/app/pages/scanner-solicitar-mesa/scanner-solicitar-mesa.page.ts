@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ToastController } from '@ionic/angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 import { CloudFirestoreService } from 'src/app/services/cloud-firestore.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-scanner-solicitar-mesa',
@@ -23,6 +25,8 @@ export class ScannerSolicitarMesaPage implements OnInit {
               private cloud: CloudFirestoreService,
               private auth: AuthService,
               private db: AngularFirestore,
+              public toastController: ToastController,
+              private homeService: HomeService,
               private router: Router) { }
 
   async ngOnInit() {
@@ -51,7 +55,7 @@ export class ScannerSolicitarMesaPage implements OnInit {
      });
   }
 
-  VerificarScan(codigo: string){
+  async VerificarScan(codigo: string){
     this.errorCodigo = false;
     if(codigo == "solicitar_mesa"){
       let elementoAgregar = {
@@ -60,6 +64,14 @@ export class ScannerSolicitarMesaPage implements OnInit {
       };
       this.cloud.AgregarConId("listaEspera", this.idUsuarioActual, elementoAgregar);
       this.estaEnEspera = true;
+      this.cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
+        snap.forEach(rta=>{
+          if(rta.payload.doc.get("cliente")==this.idUsuarioActual && rta.payload.doc.get("estado")=="ocupada"){
+            this.router.navigate(['home']);
+            this.toastCuentaRegistrada();
+          }
+        })
+      })
     }
     else{
       this.errorCodigo = true;
@@ -73,5 +85,15 @@ export class ScannerSolicitarMesaPage implements OnInit {
 
   Volver(){
     this.router.navigate(['home']);
+  }
+
+  async toastCuentaRegistrada() {
+    const toast = await this.toastController.create({
+      message: 'Solicitud de mesa aprobada',
+      duration: 3000,
+      position: "bottom",
+      color: "primary"
+    });
+    toast.present();
   }
 }

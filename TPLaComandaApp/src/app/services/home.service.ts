@@ -18,6 +18,7 @@ export class HomeService {
   perfilAnonimo = true;
   tipoEmpleado = 'metre';
   nombre: string;
+  puedeConsultar: boolean;
 
   // lista de botones del menu
   listaMenu: Menu[];
@@ -106,9 +107,9 @@ export class HomeService {
         icon: 'chatbubbles',
         class: !this.solicitudMesaAceptada ? 'icon_5px' : 'icon_4px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-        visible: this.solicitudMesaAceptada
+        visible: this.puedeConsultar
       },
-      {
+      /*{
         route: '/reserva',
         title: 'Hacé tu reserva', // cliente
         icon: 'calendar',
@@ -123,7 +124,7 @@ export class HomeService {
         class: !this.solicitudMesaAceptada ? 'icon_5px' : 'icon_4px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
         visible: true
-      }
+      }*/
     ];
    }
 
