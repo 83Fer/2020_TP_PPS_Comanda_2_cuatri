@@ -6,6 +6,7 @@ import { PedidosService } from '../../services/pedido.service';
 import { Pedido } from '../../models/pedido-model';
 import { AsignarMesaService } from '../../services/asignar-mesa.service';
 import { AuthService } from '../../services/auth.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-scanner-mesa',
@@ -25,6 +26,7 @@ export class ScannerMesaPage implements OnInit {
     private conceptosService: ConceptosService,
     private pedidosService: PedidosService,
     private asignarMesaService: AsignarMesaService,
+    private homeService: HomeService,
     private authService: AuthService
     ) { }
 
@@ -45,6 +47,7 @@ export class ScannerMesaPage implements OnInit {
       if(clienteEnMesa){
         this.asignarMesaService.codigoMesaAsignada = qrMesa;
         this.cargarMenu();
+        this.homeService.puedeConsultar = true;
         this.navCtrl.navigateRoot('/pedido');
       }
     }
