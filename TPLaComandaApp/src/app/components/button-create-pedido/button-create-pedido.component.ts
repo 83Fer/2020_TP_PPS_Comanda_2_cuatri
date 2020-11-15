@@ -3,6 +3,7 @@ import { PedidosService } from '../../services/pedido.service';
 import { ToastService } from '../../services/ui-service.service';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { PushNotificationService } from '../../services/push-notification.service';
 
 @Component({
   selector: 'app-button-create-pedido',
@@ -27,7 +28,8 @@ export class ButtonCreatePedidoComponent implements OnInit {
     private ngFireAuth: AngularFireAuth,
     private toastService: ToastService,
     public pedidosService: PedidosService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private pushNotificationService: PushNotificationService
   ) { }
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class ButtonCreatePedidoComponent implements OnInit {
 
     if (creado) {
       this.toastService.presentToast( 'Orden enviada.' );
+      this.pushNotificationService.enviarNotification();
       this.navCtrl.navigateRoot(`/home`);
     } else {
       this.toastService.presentToast( 'Error al enviar la orden.' );

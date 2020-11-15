@@ -46,9 +46,19 @@ const routes: Routes = [
   {
     path: 'estado-pedido',
     loadChildren: () => import('./pages/estado-pedido/estado-pedido.module').then( m => m.EstadoPedidoPageModule)
-  },  {
+  },
+  {
     path: 'estado-pedido-cliente',
     loadChildren: () => import('./pages/estado-pedido-cliente/estado-pedido-cliente.module').then( m => m.EstadoPedidoClientePageModule)
+  },
+  {
+    path: 'home-mesas',
+    loadChildren: () => import('./pages/home-mesas/home-mesas.module').then( m => m.HomeMesasPageModule)
+  },
+  {
+    path: 'estado-pedido-cliente-confirma',
+    loadChildren: () => import('./pages/estado-pedido-cliente-confirma/estado-pedido-cliente-confirma.module')
+    .then( m => m.EstadoPedidoClienteConfirmaPageModule)
   }
 
 

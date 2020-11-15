@@ -33,15 +33,6 @@ export class ButtonUpdateEstadoPedidoComponent implements OnInit {
   async update() {
     const docID = this.pedidosService.pedido.docID;
 
-    this.pedido.usuarioDocID = this.pedidosService.pedido.usuarioDocID;
-    this.pedido.usuarioNombre = this.pedidosService.pedido.usuarioNombre;
-    this.pedido.mesaDocID = this.pedidosService.pedido.mesaDocID;
-    this.pedido.mesaNro = this.pedidosService.pedido.mesaNro;
-    this.pedido.fechaInicio = this.pedidosService.pedido.fechaInicio;
-    this.pedido.fechaFin = '';
-    this.pedido.estado = this.pedidosService.pedido.estado;
-    this.pedido.importeTotal = this.pedidosService.pedido.importeTotal;
-
     for (const iterator of this.pedidosService.pedido.detallePedido) {
       if (this.pedidosService.pedidoDetalle.conceptoDocID === iterator.conceptoDocID){
         this.pedido.detallePedido.push(this.pedidosService.pedidoDetalle);
@@ -49,6 +40,16 @@ export class ButtonUpdateEstadoPedidoComponent implements OnInit {
         this.pedido.detallePedido.push(iterator);
       }
     }
+
+    this.pedido.usuarioDocID = this.pedidosService.pedido.usuarioDocID;
+    this.pedido.usuarioNombre = this.pedidosService.pedido.usuarioNombre;
+    this.pedido.mesaDocID = this.pedidosService.pedido.mesaDocID;
+    this.pedido.mesaNro = this.pedidosService.pedido.mesaNro;
+    this.pedido.fechaInicio = this.pedidosService.pedido.fechaInicio;
+    this.pedido.fechaFin = '';
+    this.pedido.estado = this.pedidoEntregado() ? 'Confirmar entrega' : this.pedidosService.pedido.estado;
+    this.pedido.importeTotal = this.pedidosService.pedido.importeTotal;
+
 
     const modificado = await this.pedidosService.updatePedido(docID, this.pedido);
 
@@ -59,6 +60,15 @@ export class ButtonUpdateEstadoPedidoComponent implements OnInit {
       this.toastService.presentToast( 'Error al actualizar pedido.' );
     }
 
+  }
+
+  pedidoEntregado() {
+    for (const iterator of this.pedido.detallePedido) {
+      if (iterator.estado !== 'Entregado'){
+        return false;
+      }
+    }
+    return true;
   }
 
 }

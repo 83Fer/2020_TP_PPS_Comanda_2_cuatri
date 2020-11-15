@@ -9,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 // Componentes
 import { ComponentsModule } from './components/components.module';
 
@@ -21,6 +23,7 @@ import { firebaseConfig } from '../config/firebase.config';
 
 // Capacitor
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,12 +36,14 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    ComponentsModule
+    ComponentsModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    OneSignal,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
