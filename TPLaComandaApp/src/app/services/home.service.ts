@@ -3,16 +3,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { EmpleadoService } from './empleado.service';
 
+import { AsignarMesaService } from '../services/asignar-mesa.service';
+import { AuthService } from '../services/auth.service';
+import { CloudFirestoreService } from './cloud-firestore.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
   // propiedades provisoria
-  solicitudMesaAceptada = false;
+  //solicitudMesaAceptada = true;
+  solicitudMesaAceptada: boolean;
   perfilAnonimo = true;
   tipoEmpleado = 'metre';
   nombre: string;
+  puedeConsultar: boolean;
 
   // lista de botones del menu
   listaMenu: Menu[];
@@ -26,10 +32,37 @@ export class HomeService {
   constructor(
     private ngFireAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private empleadoService: EmpleadoService) {
+    private cloud: CloudFirestoreService,
+    private empleadoService: EmpleadoService,
+    private asignarMesaService: AsignarMesaService,
+    private authSerice: AuthService
+  ) {
+    console.log('Entra al home');
+    // this.asignarMesaService.getListaMesas().subscribe((lista) =>{
+      // let clienteUID: string = this.authSerice.getUIDUserLoggeado();
+      // let estaEnMesa: boolean = false;
+      // lista.forEach((mesa) =>{
+      //   if(mesa.cliente == clienteUID && mesa.estado !== "libre"){
+      //     this.asignarMesaService.codigoMesaAsignada = mesa.id;
+      //     estaEnMesa = true;
+      //   }
+      // });
+      // this.solicitudMesaAceptada = estaEnMesa;
+    // });
+    let idUsuario;
+    authSerice.ObtenerActual().subscribe(rta=>{
+      idUsuario = rta.id;
+      this.solicitudMesaAceptada=false;
+      cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
+        snap.forEach(rta=>{
+          if(rta.payload.doc.get("cliente")==idUsuario&& rta.payload.doc.get("estado")=="ocupada"){
+            this.solicitudMesaAceptada=true;
+          }
+        })
+      })
+    })
 
-      console.log('Entra al home');
-   }
+  }
 
 
    getMenuCliente() {
@@ -74,9 +107,9 @@ export class HomeService {
         icon: 'chatbubbles',
         class: !this.solicitudMesaAceptada ? 'icon_5px' : 'icon_4px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
-        visible: this.solicitudMesaAceptada
+        visible: this.puedeConsultar
       },
-      {
+      /*{
         route: '/reserva',
         title: 'Hacé tu reserva', // cliente
         icon: 'calendar',
@@ -91,7 +124,7 @@ export class HomeService {
         class: !this.solicitudMesaAceptada ? 'icon_5px' : 'icon_4px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
         visible: true
-      }
+      }*/
     ];
    }
 
@@ -130,8 +163,8 @@ export class HomeService {
         visible: this.tipoEmpleado !== 'metre'
       },
       {
-        route: '/listaMesaAsignadas',
-        title: 'Lista de mesas a asignar', // metre
+        route: '/asignar-mesa',
+        title: 'Lista de clientes en espera', // metre
         icon: 'reader-outline',
         class: 'icon_5px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
@@ -152,7 +185,15 @@ export class HomeService {
         class: 'icon_5px',
         style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
         visible: true
-      }
+      },
+      {
+        route: '/consulta-mozo',
+        title: 'Consultas de clientes', // mozo y metre?
+        icon: 'chatbubbles',
+        class: !this.solicitudMesaAceptada ? 'icon_5px' : 'icon_4px',
+        style: {'background-color': 'rgb(83 156 247)', 'align-text': 'center'},
+        visible: this.tipoEmpleado ==='mozo' || this.tipoEmpleado ==='metre'
+      },
     ];
    }
 
@@ -175,7 +216,7 @@ export class HomeService {
         visible: true
       },
       {
-        route: '/solicitud',
+        route: '/supervisar-clientes',
         title: 'Solicitud de clientes', // Supervisor o dueño
         icon: 'people',
         class: 'icon_5px',

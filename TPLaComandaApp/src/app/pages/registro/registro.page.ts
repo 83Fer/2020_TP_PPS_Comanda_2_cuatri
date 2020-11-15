@@ -54,6 +54,7 @@ export class RegistroPage implements OnInit {
     let listDatos = textoQr.split('@');
     this.cliente.apellido = listDatos[1];
     this.cliente.nombre = listDatos[2];
+    this.dniString = listDatos[4];
     this.cliente.dni = parseInt(listDatos[4]);
   }
 
@@ -165,6 +166,11 @@ export class RegistroPage implements OnInit {
       email: this.usuario.mail,
     };
     this.cloud.AgregarConId("usuarios", idGenerado, clienteAgregar);
+    this.cloud.AgregarConId("clientesASupervisar", idGenerado, {
+      nombre: cliente.nombre,
+      email: this.usuario.mail,
+      estado: "esperando"
+    });
     this.loading.dismiss();
   }
 

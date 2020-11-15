@@ -57,3 +57,19 @@
         background-color: #ffd000c0;
     } 
   }
+
+/* Estilos del ActionSheet para Asignar-Mesa */
+.customActionSheet .action-sheet-group{
+    background-color: lightblue !important;
+    color: #00158d !important;
+    text-align: center;
+}
+
+.customActionSheet .action-sheet-title{
+    color: #4434d8;
+}
+
+.action-sheet-group > .customActionButton{
+    color: #C22727;
+    text-align: center;
+}
