@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { ToastService } from 'src/app/services/ui-service.service';
 import { PedidosService } from '../../services/pedido.service';
 
@@ -25,7 +26,8 @@ export class ButtonUpdateEstadoPedidoComponent implements OnInit {
   constructor(
     private pedidosService: PedidosService,
     private toastService: ToastService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private pushNotificationService: PushNotificationService
   ) { }
 
   ngOnInit() {}
@@ -36,6 +38,10 @@ export class ButtonUpdateEstadoPedidoComponent implements OnInit {
     for (const iterator of this.pedidosService.pedido.detallePedido) {
       if (this.pedidosService.pedidoDetalle.conceptoDocID === iterator.conceptoDocID){
         this.pedido.detallePedido.push(this.pedidosService.pedidoDetalle);
+        if (this.pedidosService.pedidoDetalle.estado === 'Listo para servir') {
+          this.pushNotificationService
+          .sendUserIDsEmpleado(`Nuevo pedido a entregar (${this.pedidosService.pedidoDetalle.conceptoNombre})`, 'mozo');
+        }
       } else {
         this.pedido.detallePedido.push(iterator);
       }

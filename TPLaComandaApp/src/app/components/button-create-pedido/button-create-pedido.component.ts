@@ -4,6 +4,7 @@ import { ToastService } from '../../services/ui-service.service';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { PushNotificationService } from '../../services/push-notification.service';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-button-create-pedido',
@@ -24,22 +25,40 @@ export class ButtonCreatePedidoComponent implements OnInit {
     detallePedido: []
   };
 
+  usuarioDocID: string;
+  mesaDocID: string;
+  mesaNro: string;
+
+  usuarioNombre: string;
+
   constructor(
     private ngFireAuth: AngularFireAuth,
     private toastService: ToastService,
     public pedidosService: PedidosService,
     private navCtrl: NavController,
-    private pushNotificationService: PushNotificationService
+    private pushNotificationService: PushNotificationService,
+    private homeService: HomeService
   ) { }
 
   ngOnInit() {
+    this.usuarioDocID = this.ngFireAuth.auth.currentUser.uid;
+    this.pedidosService.getMesas().subscribe(snap => {
+      snap.forEach(async (data: any) => {
+        const mesa = data.payload.doc.data();
+        if (mesa.cliente === this.usuarioDocID) {
+          const m = data.payload.doc.data();
+          this.mesaDocID = data.payload.doc.id;
+          this.mesaNro = m.codigoqr;
+        }
+      });
+    });
   }
 
   async enviarPedido() {
     this.pedido.usuarioDocID = this.ngFireAuth.auth.currentUser.uid;
-    this.pedido.usuarioNombre = 'Juan';
-    this.pedido.mesaDocID = '23';
-    this.pedido.mesaNro = '1';
+    this.pedido.usuarioNombre = this.homeService.nombre;
+    this.pedido.mesaDocID = this.mesaDocID;
+    this.pedido.mesaNro = this.mesaNro;
     this.pedido.fechaInicio = new Date().toTimeString();
     this.pedido.fechaFin = '';
     this.pedido.estado = 'Confirmar';
@@ -56,7 +75,9 @@ export class ButtonCreatePedidoComponent implements OnInit {
 
     if (creado) {
       this.toastService.presentToast( 'Orden enviada.' );
-      this.pushNotificationService.enviarNotification();
+      // se envia a todos los mozos
+      this.pushNotificationService.sendUserIDs('Hay un nuevo pedido a confirmar', 'mozo');
+
       this.navCtrl.navigateRoot(`/home`);
     } else {
       this.toastService.presentToast( 'Error al enviar la orden.' );

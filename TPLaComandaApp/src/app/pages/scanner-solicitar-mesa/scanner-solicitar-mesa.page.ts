@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 import { CloudFirestoreService } from 'src/app/services/cloud-firestore.service';
 import { HomeService } from 'src/app/services/home.service';
+import { PushNotificationService } from '../../services/push-notification.service';
 
 @Component({
   selector: 'app-scanner-solicitar-mesa',
@@ -27,7 +28,8 @@ export class ScannerSolicitarMesaPage implements OnInit {
               private db: AngularFirestore,
               public toastController: ToastController,
               private homeService: HomeService,
-              private router: Router) { }
+              private router: Router,
+              private pushNotificationService: PushNotificationService) { }
 
   async ngOnInit() {
     this.auth.ObtenerActual().subscribe(rta=>{
@@ -64,6 +66,7 @@ export class ScannerSolicitarMesaPage implements OnInit {
       };
       this.cloud.AgregarConId("listaEspera", this.idUsuarioActual, elementoAgregar);
       this.estaEnEspera = true;
+      this.pushNotificationService.sendUserIDsEmpleado('Nuevo cliente en la lista de espera.', 'metre');
       this.cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
         snap.forEach(rta=>{
           if(rta.payload.doc.get("cliente")==this.idUsuarioActual && rta.payload.doc.get("estado")=="ocupada"){

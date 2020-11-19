@@ -14,7 +14,7 @@ import { ConceptosService } from 'src/app/services/concepto.service';
 export class ListaPedidosPage implements OnInit {
 
   cantPedidos: number;
-  showPedido: boolean;
+  listaPedido: number;
 
   constructor(
     private navCtrl: NavController,
@@ -22,12 +22,22 @@ export class ListaPedidosPage implements OnInit {
     public empleadoService: EmpleadoService,
     private conceptosService: ConceptosService
   ) {
-    this.showPedido = true;
-    console.log(this.showPedido);
+    this.listaPedido = 0;
+    console.log(this.listaPedido);
   }
 
   ngOnInit() {
     this.cargarListaDetallePedidos();
+  }
+
+  showListaPedido(ev: any) {
+    if (ev.detail.value === 'confirma') {
+      this.listaPedido = 0;
+    } else if (ev.detail.value === 'servir') {
+      this.listaPedido = 1;
+    } else if (ev.detail.value === 'pago') {
+      this.listaPedido = 2;
+    }
   }
 
   mostrarDetalle(detalle: PedidoDetalle) {
@@ -53,10 +63,18 @@ export class ListaPedidosPage implements OnInit {
     }, 700);
   }
 
+  confirmarPago(pedido) {
+    this.pedidosService.pedido = pedido;
+    setTimeout(() => {
+      this.navCtrl.navigateRoot(`/cuenta-pedido-cliente`);
+    }, 700);
+  }
+
   cargarListaDetallePedidos() {
     this.pedidosService.getPedidos()
     .subscribe((snap) => {
       this.pedidosService.pedidos = [];
+      this.pedidosService.pedidosAPagar = [];
       this.pedidosService.PedidosDetalle = [];
       snap.forEach(async (data: any) => {
         let pedido: Pedido = new Pedido();
@@ -99,9 +117,10 @@ export class ListaPedidosPage implements OnInit {
       });
     }
     if (this.empleadoService.tipo === 'mozo' && pedido.estado === 'Confirmar') {
-      if (pedido.estado === 'Confirmar'){
-        this.pedidosService.pedidos.push(pedido);
-      }
+      this.pedidosService.pedidos.push(pedido);
+    }
+    if (this.empleadoService.tipo === 'mozo' && pedido.estado === 'Solicita cuenta') {
+      this.pedidosService.pedidosAPagar.push(pedido);
     }
   }
 

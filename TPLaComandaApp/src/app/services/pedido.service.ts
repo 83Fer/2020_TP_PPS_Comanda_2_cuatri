@@ -18,6 +18,8 @@ export class PedidosService {
   pedidoDetalle: PedidoDetalle;
   totalPedido: number;
 
+  pedidosAPagar: Pedido[] = [];
+
   // crear propiedades para user
 
   constructor(
@@ -66,6 +68,10 @@ export class PedidosService {
     for (const item of this.pedido.detallePedido) {
       this.totalPedido = this.totalPedido + +item.importeTotal;
     }
+  }
+
+  getMesas() {
+    return this.afs.collection('mesas').snapshotChanges();
   }
 
 }

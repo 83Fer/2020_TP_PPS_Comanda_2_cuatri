@@ -51,7 +51,7 @@ export class HomeMesasService {
         visible: true
       },
       {
-        route: '/estado-pedido-mesa',
+        route: '/estado-pedido-cliente-confirma',
         title: 'Estado del pedido', // pedido != Confirmar entrega
         icon: 'eye',
         class: 'icon_5px',
