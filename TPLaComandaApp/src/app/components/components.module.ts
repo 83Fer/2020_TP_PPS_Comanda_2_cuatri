@@ -9,6 +9,8 @@ import { ButtonCreatePedidoComponent } from './button-create-pedido/button-creat
 import { InputSwitchComponent } from './input-switch/input-switch.component';
 import { ButtonUpdateEstadoPedidoComponent } from './button-update-estado-pedido/button-update-estado-pedido.component';
 import { ButtonUpdatePedidoConfirmComponent } from './button-update-pedido-confirm/button-update-pedido-confirm.component';
+import { ButtonUpdatePedidoRecepcionComponent } from './button-update-pedido-recepcion/button-update-pedido-recepcion.component';
+import { ButtonUpdateMozoConfirmaPedidoComponent } from './button-update-mozo-confirma-pedido/button-update-mozo-confirma-pedido.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ButtonUpdatePedidoConfirmComponent } from './button-update-pedido-confi
       ButtonCreatePedidoComponent,
       InputSwitchComponent,
       ButtonUpdateEstadoPedidoComponent,
-      ButtonUpdatePedidoConfirmComponent
+      ButtonUpdatePedidoConfirmComponent,
+      ButtonUpdatePedidoRecepcionComponent,
+      ButtonUpdateMozoConfirmaPedidoComponent
     ],
     exports: [
       ButtonFlotatingComponent,
@@ -30,7 +34,9 @@ import { ButtonUpdatePedidoConfirmComponent } from './button-update-pedido-confi
       ButtonCreatePedidoComponent,
       InputSwitchComponent,
       ButtonUpdateEstadoPedidoComponent,
-      ButtonUpdatePedidoConfirmComponent
+      ButtonUpdatePedidoConfirmComponent,
+      ButtonUpdatePedidoRecepcionComponent,
+      ButtonUpdateMozoConfirmaPedidoComponent
     ],
     imports: [
         CommonModule,

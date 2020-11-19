@@ -15,17 +15,20 @@
     <ion-card-content>
       <ion-list class="listMenu">
 
-        <ion-segment *ngIf="empleadoService.tipo === 'mozo'" value="confirma" (ionChange)="showPedido = !showPedido">
+        <ion-segment *ngIf="empleadoService.tipo === 'mozo'" value="confirma" (ionChange)="showListaPedido($event)">
           <ion-segment-button class="segment-pedido" value="confirma">
-            <ion-label>A confirmar</ion-label>
+            <ion-label>Confirmar</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="rechaza">
-            <ion-label>Listo para servir</ion-label>
+          <ion-segment-button class="segment-pedido" value="servir">
+            <ion-label>Listo para <br>servir</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="segment-pedido" value="pago">
+            <ion-label>Confirmar <br>pago </ion-label>
           </ion-segment-button>
         </ion-segment>
 
         <div *ngIf="empleadoService.tipo === 'cocinero' || empleadoService.tipo === 'bar tender' || 
-        (empleadoService.tipo === 'mozo' && !showPedido)">
+        (empleadoService.tipo === 'mozo' && listaPedido == 1)">
           <ion-item >
             <p style="width: 12%;"><strong>Cant</strong></p>
             <p style="width: 100%; text-align: center">
@@ -47,7 +50,7 @@
             <p>
           </ion-item>
         </div>
-        <div *ngIf="(empleadoService.tipo === 'mozo' && showPedido)">
+        <div *ngIf="(empleadoService.tipo === 'mozo' && listaPedido == 0)">
           <ion-item >
             <p style="width: 12%;"><strong>Mesa</strong></p>
             <p style="width: 100%; text-align: center">
@@ -64,6 +67,28 @@
               {{pedido.usuarioNombre}}
             </p>
             <p [ngStyle]="{'color': pedido.estado.match('Confirmar', 'Listo para servir') ? 'red' : 'green'}">
+              <strong>{{pedido.estado}}</strong>
+            </p>
+            <p>
+          </ion-item>
+        </div>
+        <div *ngIf="(empleadoService.tipo === 'mozo' && listaPedido == 2)">
+          <ion-item >
+            <p style="width: 12%;"><strong>Mesa</strong></p>
+            <p style="width: 100%; text-align: center">
+              <strong>Cliente</strong>
+            </p>
+            <p >
+              <strong>Estado</strong>
+            </p>
+            <p>
+          </ion-item>
+          <ion-item *ngFor="let pedido of pedidosService.pedidosAPagar" class="itemOrdenes" (click)="confirmarPago(pedido)">
+            <p style="width: 15%;"><strong>{{pedido.mesaNro}}</strong></p>
+            <p style="width: 100%; text-align: center">
+              {{pedido.usuarioNombre}}
+            </p>
+            <p [ngStyle]="{'color': 'red'}">
               <strong>{{pedido.estado}}</strong>
             </p>
             <p>

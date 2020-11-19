@@ -3,13 +3,14 @@ import { NavController } from '@ionic/angular';
 import { PedidosService } from 'src/app/services/pedido.service';
 import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { ToastService } from 'src/app/services/ui-service.service';
+import { HomeMesasService } from '../../services/home-mesas.service';
 
 @Component({
-  selector: 'app-button-update-pedido-confirm',
-  templateUrl: './button-update-pedido-confirm.component.html',
-  styleUrls: ['./button-update-pedido-confirm.component.scss'],
+  selector: 'app-button-update-pedido-recepcion',
+  templateUrl: './button-update-pedido-recepcion.component.html',
+  styleUrls: ['./button-update-pedido-recepcion.component.scss'],
 })
-export class ButtonUpdatePedidoConfirmComponent implements OnInit {
+export class ButtonUpdatePedidoRecepcionComponent implements OnInit {
 
   pedido = {
     usuarioDocID: '',
@@ -27,21 +28,24 @@ export class ButtonUpdatePedidoConfirmComponent implements OnInit {
     private pedidosService: PedidosService,
     private toastService: ToastService,
     private navCtrl: NavController,
+    private homeMesasService: HomeMesasService,
     private pushNotificationService: PushNotificationService
   ) { }
 
   ngOnInit() {}
 
-  async aceptar() {
-    this.update('Preparando');
+  async btnSi() {
+    this.update('Recibió el pedido');
   }
 
-  async rechazar() {
-    this.update('Rechazado');
+  async btnNo() {
+    // Falta funcionalidad
   }
 
   async update(estado) {
     const docID = this.pedidosService.pedido.docID;
+
+    console.log(this.pedidosService.pedido);
 
     this.pedido.usuarioDocID = this.pedidosService.pedido.usuarioDocID;
     this.pedido.usuarioNombre = this.pedidosService.pedido.usuarioNombre;
@@ -60,25 +64,16 @@ export class ButtonUpdatePedidoConfirmComponent implements OnInit {
     const modificado = await this.pedidosService.updatePedido(docID, this.pedido);
 
     if (modificado) {
-      estado === 'Rechazado' ? this.toastService.presentToast( 'Pedido rechazado.' ) :
-      this.toastService.presentToast( 'Pedido aceptado.' );
+      this.toastService.presentToast( 'Cuando guste puede pedir la cuenta.' );
 
-      // se envia a todos los cocinero y bartender
-      for (const iterator of this.pedido.detallePedido) {
-        let tipo = '';
-        if (iterator.conceptoCategoria === 'plato' || iterator.conceptoCategoria === 'postre') {
-          tipo = 'cocinero';
-        } else {
-          tipo = 'bar tender';
-        }
-        this.pushNotificationService.sendUserIDsEmpleado(`Nuevo pedido a realizar (${iterator.conceptoNombre})`, tipo);
-      }
-
-      this.navCtrl.navigateRoot(`/lista-pedidos`);
+      this.homeMesasService.pedidoConfirmado = true;
+      this.homeMesasService.getMenuMesas();
+      this.navCtrl.navigateRoot(`/home-mesas`);
     } else {
       this.toastService.presentToast( 'Error al actualizar pedido.' );
     }
 
   }
+
 
 }

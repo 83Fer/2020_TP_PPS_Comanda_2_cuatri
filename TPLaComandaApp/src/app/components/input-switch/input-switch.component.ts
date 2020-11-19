@@ -46,6 +46,7 @@ export class InputSwitchComponent implements OnInit {
   }
 
   setearEstadoPedido() {
+    this.estadoActual = '';
     this.estadoPost = 'Preparando';
   }
 

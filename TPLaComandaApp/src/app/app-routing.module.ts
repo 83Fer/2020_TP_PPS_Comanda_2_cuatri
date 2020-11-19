@@ -75,7 +75,11 @@ const routes: Routes = [
   {
     path: 'detalle-cuenta',
     loadChildren: () => import('./pages/detalle-cuenta/detalle-cuenta.module').then( m => m.DetalleCuentaPageModule)
+  },  {
+    path: 'pedido-mozo-confirma-pago',
+    loadChildren: () => import('./pages/pedido-mozo-confirma-pago/pedido-mozo-confirma-pago.module').then( m => m.PedidoMozoConfirmaPagoPageModule)
   },
+
 
 
 ];

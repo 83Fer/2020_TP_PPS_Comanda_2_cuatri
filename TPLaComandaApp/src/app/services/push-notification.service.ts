@@ -17,6 +17,8 @@ export class PushNotificationService {
 
   userID: string;
 
+  listUserIDs: string[];
+
   mensajes: OSNotificationPayload[];
 
   pushListener = new EventEmitter<OSNotificationPayload>();
@@ -63,6 +65,10 @@ export class PushNotificationService {
 
   async guardarUserID(uid) {
     this.getUsers(uid).subscribe((snap: any) => {
+      this.userIDs.userID = this.userID;
+      this.userIDs.usuarioDocID = '';
+      this.userIDs.role = '';
+      this.userIDs.tipo = '';
       const user = snap.payload.data();
       console.log(user);
       this.userIDs.usuarioDocID = uid;
@@ -109,15 +115,15 @@ export class PushNotificationService {
 
   }
 
-  async enviarNotification() {
+  async enviarNotification(message: string) {
     const header = new HttpHeaders().set('Authorization', 'Basic MTY1ZGIxMGUtMmMxNC00YzQyLTkxZjgtMjgxOGE1MTIxYTkz');
 
     const data = {
       app_id: '7e6f15f5-fb6a-47cc-a09a-4941dab6dc84',
-      data: {'userID:': '12345'},
+      data: {'userID:': this.userID},
       contents: {en: 'La Comanda', es: 'La Comanda'},
-      headings: {en: 'Se realizo un nuevo pedido de cliente', es: 'Se realizo un nuevo pedido de cliente'},
-      include_player_ids: ['e9713158-3d8b-4399-b3ec-bc6ef157a6e9']
+      headings: {en: message, es: message},
+      include_player_ids: this.listUserIDs
     };
 
     return new Promise( resolve =>  {
@@ -134,6 +140,57 @@ export class PushNotificationService {
                         }
                       });
 
+    });
+  }
+
+  sendUserIDs(message: string, role: string) {
+    this.afs.collection('UserIDs').get()
+    .subscribe((snap: any) => {
+      this.listUserIDs = [];
+      snap.forEach(async (data: any) => {
+        const userID = data.data();
+        const docID = data.id;
+        if (userID.role === role) {
+          this.listUserIDs.push(docID);
+        }
+      });
+      if (this.listUserIDs.length > 0) {
+        this.enviarNotification(message);
+      }
+    });
+  }
+
+  sendUserIDsEmpleado(message: string, tipo: string) {
+    this.afs.collection('UserIDs').get()
+    .subscribe((snap: any) => {
+      this.listUserIDs = [];
+      snap.forEach(async (data: any) => {
+        const userID = data.data();
+        const docID = data.id;
+        if (userID.role === 'empleado' && userID.tipo === tipo) {
+          this.listUserIDs.push(docID);
+        }
+      });
+      if (this.listUserIDs.length > 0) {
+        this.enviarNotification(message);
+      }
+    });
+  }
+
+  sendUserIDsUsuario(message: string, usuarioDocID: string) {
+    this.afs.collection('UserIDs').get()
+    .subscribe((snap: any) => {
+      this.listUserIDs = [];
+      snap.forEach(async (data: any) => {
+        const userID = data.data();
+        const docID = data.id;
+        if (userID.usuarioDocID === usuarioDocID) {
+          this.listUserIDs.push(docID);
+        }
+      });
+      if (this.listUserIDs.length > 0) {
+        this.enviarNotification(message);
+      }
     });
   }
 

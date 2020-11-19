@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { IClienteEspera, IClienteEsperaId } from '../clases/usuario';
 import { IMesa, IMesaID  } from '../clases/mesa';
 import { rejects } from 'assert';
+import { PushNotificationService } from './push-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class AsignarMesaService {
 
 
   constructor(
-    private dataBase: AngularFirestore
+    private dataBase: AngularFirestore,
+    private pushNotificationService: PushNotificationService
   ) { 
     this.coleccionListaEspera = dataBase.collection<IClienteEspera>("listaEspera");
     this.coleccionMesa = dataBase.collection<IMesa>("mesas");
@@ -146,6 +148,8 @@ export class AsignarMesaService {
           }
         });
         if(bandera){
+          this.pushNotificationService
+          .sendUserIDs(`Nueva solicitud de mesa`, 'metre');
           resolve(false);
         }
       });

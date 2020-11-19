@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CamaraService } from 'src/app/services/camara.service';
 import { CloudFirestoreService } from 'src/app/services/cloud-firestore.service';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { PushNotificationService } from '../../services/push-notification.service';
 
 @Component({
   selector: 'app-registro',
@@ -28,7 +29,8 @@ export class RegistroPage implements OnInit {
               private barcodeScanner: BarcodeScanner,
               private loadingCtrl: LoadingController,
               public toastController: ToastController,
-              private cloud: CloudFirestoreService) { 
+              private cloud: CloudFirestoreService,
+              private pushNotificationService: PushNotificationService) { 
     this.usuario = new UsuarioModel();
     this.cliente = new ClienteModel();
   }
@@ -171,6 +173,8 @@ export class RegistroPage implements OnInit {
       email: this.usuario.mail,
       estado: "esperando"
     });
+    this.pushNotificationService
+          .sendUserIDs(`Nuevo cliente pendiente de aprobación`, 'supervisor');
     this.loading.dismiss();
   }
 
