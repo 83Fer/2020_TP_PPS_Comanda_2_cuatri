@@ -59,6 +59,6 @@
 
 <h3>Iteración 4 14/11 - 21/11</h3>
 
-<strong>Tareas:</strong> Acoplar diferentes circuitos y modulos / Pruebas de la app con diferentes escenarios <br>
+<strong>Tareas en equipo:</strong> Acoplar diferentes circuitos y modulos / Pruebas de la app con diferentes escenarios <br>
 / Corrección de bugs <br><br>
 
