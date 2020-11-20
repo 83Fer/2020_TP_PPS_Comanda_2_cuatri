@@ -44,3 +44,21 @@
 
 <strong>Nombre:</strong> Emiliano Medina<br>
 <strong>Tareas:</strong> Logo de la empresa / Asignar mesa (Metre) / Codigo QR al tener mesa asignada (Cliente) <br><br>
+
+<h3>Iteración 3 07/11 - 14/11</h3>
+
+<strong>Nombre:</strong> Fernando Rivara<br>
+<strong>Tareas:</strong> Se agrega push notifiaction / Manejo de los estados del pedido (mozo, cocinero, bartender) <br>
+/ Se agrega Menu para los juegos, encuesta y estado del pedido (cliente) / Se agrega vista del pedido (cliente) <br><br>
+
+<strong>Nombre:</strong> Franco Rojas<br>
+<strong>Tareas:</strong> Chat de consulta (cliente, mozo) / Solicitar cuenta (cliente)<br><br>
+
+<strong>Nombre:</strong> Emiliano Medina<br>
+<strong>Tareas:</strong> Funcionalidad de solicitud de mesas asignadas (Metre) / Encuesta (Cliente) / lista de cuentas pendientes <br><br>
+
+<h3>Iteración 4 14/11 - 21/11</h3>
+
+<strong>Tareas:</strong> Acoplar diferentes circuitos y modulos / Pruebas de la app con diferentes escenarios <br>
+/ Corrección de bugs <br><br>
+
