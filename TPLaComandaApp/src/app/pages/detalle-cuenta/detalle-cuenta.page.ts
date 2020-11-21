@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CloudFirestoreService } from 'src/app/services/cloud-firestore.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-detalle-cuenta',
@@ -13,15 +15,20 @@ export class DetalleCuentaPage implements OnInit {
   listaPedidos: Array<any>;
   totalPagar: number;
   propina: number = 0;
-  constructor(private cloud: CloudFirestoreService, private auth: AuthService) { }
+  mesaCliente: string;
+  constructor(private cloud: CloudFirestoreService, 
+              private auth: AuthService,
+              private router: Router,
+              private homeService: HomeService) { }
 
   async ngOnInit() {
     this.idUserActual = this.auth.getUIDUserLoggeado();
     this.cloud.ObtenerTodosTiempoReal("pedidos").subscribe(snap=>{
       this.listaPedidos = [];
       snap.forEach(rta=>{
-        if(rta.payload.doc.get("usuarioDocID")==this.idUserActual){          
+        if(rta.payload.doc.get("usuarioDocID")==this.idUserActual){                    
           let payload = rta.payload.doc;
+          this.mesaCliente = payload.get("mesaDocID");
           let detalles = payload.get("detallePedido");
           for (let index = 0; index < detalles.length; index++) {
             const detalle = detalles[index];
@@ -36,7 +43,8 @@ export class DetalleCuentaPage implements OnInit {
         }
       });
       this.CalcularTotalPagar();
-    })
+      this.VerificarEstadoMesa();
+    });
   }
 
   CalcularTotalPagar(){
@@ -53,7 +61,19 @@ export class DetalleCuentaPage implements OnInit {
     });
   }
 
+  VerificarEstadoMesa(){
+    this.cloud.ObtenerTodosTiempoReal("mesas").subscribe(snap=>{
+      snap.forEach(rta=>{
+        if(rta.payload.doc.id==this.mesaCliente && rta.payload.doc.get("estado")=="libre"){
+          this.homeService.solicitudMesaAceptada = false;
+          this.homeService.puedeConsultar = false;
+          this.router.navigate(['home']);
+        }
+      })
+    })
+  }
+
   Volver(){
-    //  TODO
+    this.router.navigate(['home']);
   }
 }

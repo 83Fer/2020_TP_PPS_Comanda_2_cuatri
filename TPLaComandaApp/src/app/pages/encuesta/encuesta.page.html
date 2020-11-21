@@ -40,11 +40,11 @@
             </ion-row>
             <ion-row>
               <ion-col size="6" class="celdaCentrada">
-                <input type="radio" id="no" name="higiene" value="si" formControlName="higiene">
+                <input class="radioExpandido" type="radio" id="no" name="higiene" value="si" formControlName="higiene">
                 <label for="male">Si</label><br>
               </ion-col>
               <ion-col size="6" class="celdaCentrada">
-                <input type="radio" id="si" name="higiene" value="no" formControlName="higiene">
+                <input class="radioExpandido" type="radio" id="si" name="higiene" value="no" formControlName="higiene">
                 <label for="female">No</label><br>
               </ion-col>
             </ion-row>
@@ -59,11 +59,11 @@
             </ion-row>
             <ion-row>
               <ion-col size="6" class="celdaCentrada">
-                <input type="radio" id="male" name="recomendacion" value="si" formControlName="recomendacion">
+                <input class="radioExpandido" type="radio" id="male" name="recomendacion" value="si" formControlName="recomendacion">
                 <label for="male">Si</label><br>
               </ion-col>
               <ion-col size="6" class="celdaCentrada">
-                <input type="radio" id="female" name="recomendacion" value="no" formControlName="recomendacion">
+                <input class="radioExpandido" type="radio" id="female" name="recomendacion" value="no" formControlName="recomendacion">
                 <label for="female">No</label><br>
               </ion-col>
             </ion-row>
@@ -78,11 +78,11 @@
             </ion-row>
             <ion-row>
               <ion-col size="6" class="celdaCentrada">
-                <input type="radio" id="male" name="tardanza" value="si" formControlName="tardanza">
+                <input class="radioExpandido" type="radio" id="male" name="tardanza" value="si" formControlName="tardanza">
                 <label for="male">Si</label><br>
               </ion-col>
               <ion-col size="6" class="celdaCentrada">
-                <input type="radio" id="female" name="tardanza" value="no" formControlName="tardanza">
+                <input class="radioExpandido" type="radio" id="female" name="tardanza" value="no" formControlName="tardanza">
                 <label for="female">No</label><br>
               </ion-col>
             </ion-row>
@@ -102,7 +102,7 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12">
-                <ion-button expand="block" type="submit" [disabled]="!encuestaForm.valid">Enviar</ion-button>
+                <ion-button class="buttonEnviar" expand="block" type="submit" [disabled]="!encuestaForm.valid">Enviar</ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
