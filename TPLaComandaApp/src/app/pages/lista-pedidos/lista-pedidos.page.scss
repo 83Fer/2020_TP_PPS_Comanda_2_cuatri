@@ -11,3 +11,36 @@
 .segment-pedido {
     margin-left: 4px;
 }
+
+.tabla{
+    border: 1px solid red;
+}
+
+.celda{
+    //border-right: 1px solid black;
+    border-bottom: 1px solid #b6afaf;
+    margin-bottom: 5px;
+    justify-content: center;
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+}
+
+.borderDer{
+    border-right: 1px solid #b6afaf;
+}
+
+.centrar{
+    text-align: center;
+}
+
+.nombreMesa{
+    font-size: 1em;
+    color: black;
+    font-weight: bold;
+}
+
+.titulo{
+    color: black;
+    font-weight: bold;
+}

@@ -28,7 +28,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.pushNotificationService.ConfigInitial();
-      timer(7000).subscribe(() => { this.showPlash = false; });
+      timer(500).subscribe(() => { this.showPlash = false; });
     });
   }
 }

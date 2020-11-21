@@ -48,7 +48,13 @@ export class ScannerMesaPage implements OnInit {
         this.asignarMesaService.codigoMesaAsignada = qrMesa;
         this.cargarMenu();
         this.homeService.puedeConsultar = true;
-        this.navCtrl.navigateRoot('/pedido');
+        const pedidoConfirmado: boolean = await this.pedidosService.getPedidoRealizado();
+        if(pedidoConfirmado){
+          this.navCtrl.navigateRoot('/home-mesas');
+        }
+        if(!pedidoConfirmado){
+          this.navCtrl.navigateRoot('/pedido');
+        }
       }
     }
   }

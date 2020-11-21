@@ -5,6 +5,9 @@ import { PedidosService } from '../../services/pedido.service';
 import { EmpleadoService } from '../../services/empleado.service';
 import { PedidoDetalle } from '../../models/pedido-detalle-model';
 import { ConceptosService } from 'src/app/services/concepto.service';
+import { AsignarMesaService } from '../../services/asignar-mesa.service';
+import { IMesaID } from '../../clases/mesa';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -15,14 +18,17 @@ export class ListaPedidosPage implements OnInit {
 
   cantPedidos: number;
   listaPedido: number;
+  listaMesas: Observable <IMesaID[]>;
 
   constructor(
     private navCtrl: NavController,
     public pedidosService: PedidosService,
     public empleadoService: EmpleadoService,
-    private conceptosService: ConceptosService
+    private conceptosService: ConceptosService,
+    private asignarMesaService: AsignarMesaService 
   ) {
     this.listaPedido = 0;
+    this.listaMesas = this.asignarMesaService.listaMesas;
     console.log(this.listaPedido);
   }
 
@@ -124,4 +130,8 @@ export class ListaPedidosPage implements OnInit {
     }
   }
 
+  public liberarMesa(mesa: IMesaID){
+    console.log("En liberar mesa");
+    this.asignarMesaService.liberarMesa(mesa);
+  }
 }

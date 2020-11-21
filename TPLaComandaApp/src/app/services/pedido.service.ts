@@ -4,6 +4,8 @@ import { Pedido } from '../models/pedido-model';
 import { PedidoDetalle } from '../models/pedido-detalle-model';
 import { ToastService } from './ui-service.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+//
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -74,4 +76,29 @@ export class PedidosService {
     return this.afs.collection('mesas').snapshotChanges();
   }
 
+  async getPedidoRealizado(): Promise<boolean>{
+    const usuarioDocID = this.ngFireAuth.auth.currentUser.uid;
+    let observador: Subscription;
+    const terminado = await new Promise<boolean>((resolve, reject) => {
+      observador = this.getPedidos().subscribe((snap) => {
+        let bandera = true;
+        snap.forEach((data) =>{
+          let pedido: Pedido = new Pedido();
+          pedido = data.payload.doc.data();
+          pedido.docID = data.payload.doc.id;
+          if(pedido.usuarioDocID === usuarioDocID && pedido.estado == 'Preparando'){
+            bandera = false;
+            resolve(true);
+          }
+        });
+        if(bandera){
+          resolve(false);
+        }
+      });
+    });
+    if(terminado == true || terminado == false){
+      observador.unsubscribe();
+      return terminado;
+    }
+  }
 }
