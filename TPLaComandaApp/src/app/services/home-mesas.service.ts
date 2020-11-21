@@ -59,7 +59,7 @@ export class HomeMesasService {
         visible: !this.pedidoConfirmado
       },
       {
-        route: '/cuenta',
+        route: '/detalle-cuenta',
         title: 'Pedir cuenta', // pedido == Confirmar entrega
         icon: 'card',
         class: 'icon_5px',
