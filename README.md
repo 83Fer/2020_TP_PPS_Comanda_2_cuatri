@@ -4,12 +4,10 @@
 
 ![icon-comanda](https://user-images.githubusercontent.com/12042953/98424697-44a52900-2071-11eb-8f34-bfc994be0930.jpeg)
 
-<h3>Icono y Splash</h3>
-<div>
-<img src="https://user-images.githubusercontent.com/12042953/98425218-20e2e280-2073-11eb-9ebc-c732eb3e9b70.png" width=400 margin-right: 15px;>
-
+<h3><strong>Icono</strong></h3>
+<img src="https://user-images.githubusercontent.com/12042953/98425218-20e2e280-2073-11eb-9ebc-c732eb3e9b70.png" width=400>
+<h3><strong>Splash</strong></h3>
 <img src="https://user-images.githubusercontent.com/12042953/99884010-b51f7e80-2c09-11eb-9fe7-2ea0b299f8ac.jpeg" width=400>
-</div>
 
 <br><br>
 
