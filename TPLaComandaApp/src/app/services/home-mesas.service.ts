@@ -73,7 +73,7 @@ export class HomeMesasService {
 
     return new Promise ( resolve =>
       {
-        const docID = 'hnisKem9mVaYjdWsCd6M85hgIX93'; // this.ngFireAuth.auth.currentUser.uid;
+        const docID = this.ngFireAuth.auth.currentUser.uid;
 
         this.pedidosService.getPedidos()
             .subscribe((snap) => {
