@@ -7,8 +7,7 @@ import { PedidoDetalle } from '../../models/pedido-detalle-model';
 import { ConceptosService } from 'src/app/services/concepto.service';
 import { AsignarMesaService } from '../../services/asignar-mesa.service';
 import { IMesaID } from '../../clases/mesa';
-import { Observable } from 'rxjs';
-
+import { Observable, Subscription} from 'rxjs';
 @Component({
   selector: 'app-lista-pedidos',
   templateUrl: './lista-pedidos.page.html',
@@ -130,8 +129,36 @@ export class ListaPedidosPage implements OnInit {
     }
   }
 
-  public liberarMesa(mesa: IMesaID){
+  public async liberarMesa(mesa: IMesaID){
     console.log("En liberar mesa");
-    this.asignarMesaService.liberarMesa(mesa);
+    let observador: Subscription;
+    let pedidoEncontrado: Pedido;
+    const terminado = await new Promise<boolean>((resolve, reject) => {
+      observador = this.pedidosService.getPedidos().subscribe((snap) => {
+        let bandera = true;
+        let cuenta = 0;
+        snap.forEach((data) =>{
+          cuenta++;
+          let pedido = new Pedido();
+          pedido = data.payload.doc.data();
+          pedido.docID = data.payload.doc.id;
+          if(pedido.mesaDocID == mesa.id && pedido.estado == 'Recibió el pedido'){
+            bandera = false;
+            pedidoEncontrado = pedido;
+            resolve(true);
+          }
+        });
+        if(bandera){
+          resolve(false);
+        }
+      });
+    });
+    if(terminado == true || terminado == false){
+      observador.unsubscribe();
+      if(terminado){
+        this.pedidosService.cerrarPedido(pedidoEncontrado);
+        this.asignarMesaService.liberarMesa(mesa);
+      } 
+    }
   }
 }

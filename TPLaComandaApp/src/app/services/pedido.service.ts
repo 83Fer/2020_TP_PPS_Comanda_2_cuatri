@@ -101,4 +101,23 @@ export class PedidosService {
       return terminado;
     }
   }
+
+  public cerrarPedido(pedido: Pedido){
+    let hora = new Date();
+    let actual = hora.toString();
+    let pedidoModificado: Pedido = {
+      detallePedido: pedido.detallePedido,
+      estado: 'Cerrado',
+      usuarioDocID: pedido.usuarioDocID,
+      usuarioNombre: pedido.usuarioNombre,
+      mesaDocID: pedido.mesaDocID,
+      mesaNro: pedido.mesaNro,
+      fechaInicio: pedido.fechaInicio,
+      fechaFin: actual,
+      importeTotal: pedido.importeTotal,
+    };
+    this.afs.collection('pedidos').doc(pedido.docID).update(pedidoModificado).then((data) =>{
+      console.log("cambiado");
+    });
+  }
 }

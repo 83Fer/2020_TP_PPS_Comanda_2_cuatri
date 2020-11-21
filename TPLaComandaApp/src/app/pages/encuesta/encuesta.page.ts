@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class EncuestaPage implements OnInit {
 
   encuestaForm: FormGroup;
-  encuestaLista: boolean = false;
   dataEncuesta: string;
 
   constructor(
@@ -54,16 +53,8 @@ export class EncuestaPage implements OnInit {
     this.router.navigateByUrl("/home-mesas");
   }
 
-  public habilitarEncuesta(){
-    console.log("CLICK");
-    this.encuestaLista = true;
-  }
-
   public irAtras(){
     this.router.navigateByUrl("/home-mesas");
   }
 
-  public algo(data){
-    console.log("DATAAAAA", data);
-  }
 }
