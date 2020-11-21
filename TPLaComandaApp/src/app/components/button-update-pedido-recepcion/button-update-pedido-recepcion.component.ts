@@ -68,7 +68,9 @@ export class ButtonUpdatePedidoRecepcionComponent implements OnInit {
 
       this.homeMesasService.pedidoConfirmado = true;
       this.homeMesasService.getMenuMesas();
-      this.navCtrl.navigateRoot(`/home-mesas`);
+      setTimeout(() => {
+        this.navCtrl.navigateRoot('/home-mesas');
+      }, 700);
     } else {
       this.toastService.presentToast( 'Error al actualizar pedido.' );
     }

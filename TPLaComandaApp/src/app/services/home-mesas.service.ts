@@ -85,7 +85,7 @@ export class HomeMesasService {
                   this.menuMesas();
                   this.listaMenu = this.mesasCards;
                   resolve(true);
-                } else if (pedido.usuarioDocID === docID && pedido.estado === 'Confirmar entrega'){
+                } else if (pedido.usuarioDocID === docID && pedido.estado === 'Recibió el pedido'){
                   this.pedidoConfirmado = false;
                   this.menuMesas();
                   this.listaMenu = this.mesasCards;
