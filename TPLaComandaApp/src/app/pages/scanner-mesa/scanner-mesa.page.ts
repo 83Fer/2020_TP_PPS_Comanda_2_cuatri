@@ -50,6 +50,7 @@ export class ScannerMesaPage implements OnInit {
         this.homeService.puedeConsultar = true;
         const pedidoConfirmado: boolean = await this.pedidosService.getPedidoRealizado();
         if(pedidoConfirmado){
+          console.log('En pedido confirmado');
           this.navCtrl.navigateRoot('/home-mesas');
         }
         if(!pedidoConfirmado){

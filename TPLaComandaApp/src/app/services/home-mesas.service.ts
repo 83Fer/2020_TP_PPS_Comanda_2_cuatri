@@ -27,7 +27,6 @@ export class HomeMesasService {
 
    async getMenuMesas() {
      // tslint:disable-next-line:no-debugger
-     debugger;
      this.listaMenu = [];
      this.estadoPedido();
    }
@@ -77,10 +76,12 @@ export class HomeMesasService {
 
         this.pedidosService.getPedidos()
             .subscribe((snap) => {
+              let cuenta = 0;
               snap.forEach(async (data: any) => {
+                cuenta++;
                 let pedido: Pedido = new Pedido();
-                pedido = data.payload.doc.data();
-                if (pedido.usuarioDocID === docID && pedido.estado === 'Pedido confirmado') {
+                pedido = data.payload.doc.data();               
+                if (pedido.usuarioDocID === docID && pedido.estado === 'Preparando') {
                   this.pedidoConfirmado = true;
                   this.menuMesas();
                   this.listaMenu = this.mesasCards;

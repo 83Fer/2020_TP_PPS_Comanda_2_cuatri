@@ -51,6 +51,7 @@ export class EncuestaPage implements OnInit {
   public cargarEncuesta(data){
     console.log("Encuesta", data);
     this.encuestaService.subirEncuesta(data);
+    this.router.navigateByUrl("/home-mesas");
   }
 
   public habilitarEncuesta(){
