@@ -79,6 +79,10 @@ const routes: Routes = [
     path: 'pedido-mozo-confirma-pago',
     loadChildren: () => import('./pages/pedido-mozo-confirma-pago/pedido-mozo-confirma-pago.module').then( m => m.PedidoMozoConfirmaPagoPageModule)
   },
+  {
+    path: 'encuesta',
+    loadChildren: () => import('./pages/encuesta/encuesta.module').then( m => m.EncuestaPageModule)
+  },
 
 
 
