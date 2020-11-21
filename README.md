@@ -40,7 +40,7 @@
 
 <strong>Nombre:</strong> Franco Rojas<br>
 <strong>Tareas:</strong> Ingresar cliente anonimo y escanear codigo QR para solicitar mesa (Cliente)<br>
-/ Lista de espera (Metre)<br><br>
+/ Lista de espera (Metre) / Validar que el cliente no pueda ingresar sin ser aprobado<br><br>
 
 <strong>Nombre:</strong> Emiliano Medina<br>
 <strong>Tareas:</strong> Logo de la empresa / Asignar mesa (Metre) / Codigo QR al tener mesa asignada (Cliente) <br><br>
