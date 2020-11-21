@@ -25,6 +25,7 @@ export class HomeMesasPage implements OnInit {
     public conceptosService: ConceptosService,
     private ngFireAuth: AngularFireAuth
   ) {
+    console.log('Home-mesas');
     this.previousurl = router['transitions'].value.currentSnapshot.url;
     this.usuarioDocID = this.ngFireAuth.auth.currentUser.uid;
   }

@@ -56,7 +56,7 @@ export class HomeMesasService {
         icon: 'eye',
         class: 'icon_5px',
         style: {'background-color': 'rgb(214 130 5)', 'align-text': 'center'},
-        visible: !this.pedidoConfirmado
+        visible: this.pedidoConfirmado
       },
       {
         route: '/detalle-cuenta',
@@ -64,7 +64,7 @@ export class HomeMesasService {
         icon: 'card',
         class: 'icon_5px',
         style: {'background-color': 'rgb(214 130 5)', 'align-text': 'center'},
-        visible: this.pedidoConfirmado
+        visible: !this.pedidoConfirmado
       }
     ];
    }
@@ -80,7 +80,7 @@ export class HomeMesasService {
               snap.forEach(async (data: any) => {
                 let pedido: Pedido = new Pedido();
                 pedido = data.payload.doc.data();
-                if (pedido.usuarioDocID === docID && pedido.estado === 'Pedido confirmado') {
+                if (pedido.usuarioDocID === docID && pedido.estado === 'Preparando') {
                   this.pedidoConfirmado = true;
                   this.menuMesas();
                   this.listaMenu = this.mesasCards;

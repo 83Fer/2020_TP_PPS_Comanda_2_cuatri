@@ -25,7 +25,7 @@ export class ListaPedidosPage implements OnInit {
     public pedidosService: PedidosService,
     public empleadoService: EmpleadoService,
     private conceptosService: ConceptosService,
-    private asignarMesaService: AsignarMesaService 
+    private asignarMesaService: AsignarMesaService
   ) {
     this.listaPedido = 0;
     this.listaMesas = this.asignarMesaService.listaMesas;
