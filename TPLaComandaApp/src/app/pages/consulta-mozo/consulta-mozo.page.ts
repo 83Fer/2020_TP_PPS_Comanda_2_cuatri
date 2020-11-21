@@ -121,11 +121,14 @@ export class ConsultaMozoPage implements OnInit {
       fecha_hora: this.convertDate(date)+'  '+ this.converHours(date)+'hs',
     };
     this.db.collection("mesas").doc(this.nroMesa).collection("consultas").add(mensajeGuardar);
-    if (this.tipoUsuario === 'mozo' || this.tipoUsuario === 'metre') {
-      this.pushNotificationService.sendUserIDsUsuario('Tiene un nuevo mensaje del mozo', this.idUsuarioActual);
-    } else if (this.rolUsuario === 'cliente' || this.rolUsuario === 'cliente_anonimo') {
-      this.pushNotificationService.sendUserIDsEmpleado(`Tiene un nuevo mensaje de la mesa ${this.nroMesa}`, 'mozo');
-    }
+    this.db.collection("mesas").doc(this.nroMesa).get().subscribe((data: any) => {
+      const mesa = data.payload.data();
+      if (this.tipoUsuario === 'mozo' || this.tipoUsuario === 'metre') {
+        this.pushNotificationService.sendUserIDsUsuario('Tiene un nuevo mensaje del mozo', mesa.cliente);
+      } else if (this.rolUsuario === 'cliente' || this.rolUsuario === 'cliente_anonimo') {
+        this.pushNotificationService.sendUserIDsEmpleado(`Tiene un nuevo mensaje de la mesa ${this.nroMesa}`, 'mozo');
+      }
+    });
     this.mensajeNuevo="";
   }
 
