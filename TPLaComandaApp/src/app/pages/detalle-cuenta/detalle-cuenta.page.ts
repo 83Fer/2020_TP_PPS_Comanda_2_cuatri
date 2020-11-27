@@ -15,6 +15,7 @@ export class DetalleCuentaPage implements OnInit {
   listaPedidos: Array<any>;
   totalPagar: number;
   propina: number = 0;
+  descuento: number = 0;
   mesaCliente: string;
   constructor(private cloud: CloudFirestoreService, 
               private auth: AuthService,
@@ -56,7 +57,13 @@ export class DetalleCuentaPage implements OnInit {
       if(rta.exists){
         let auxPropina = parseInt(rta.get("propina"));
         this.propina = (this.totalPagar*(auxPropina/100));
-        this.totalPagar -= this.propina;
+        
+        let auxDto = parseInt(rta.get("descuento"));
+        this.descuento = (this.totalPagar*(auxDto/100));
+
+        // this.totalPagar += this.propina;
+        // this.totalPagar-=this.descuento;
+        this.totalPagar = this.totalPagar+this.propina-this.descuento;
       }
     });
   }

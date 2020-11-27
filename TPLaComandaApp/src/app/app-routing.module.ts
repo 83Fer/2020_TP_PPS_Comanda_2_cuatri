@@ -75,7 +75,8 @@ const routes: Routes = [
   {
     path: 'detalle-cuenta',
     loadChildren: () => import('./pages/detalle-cuenta/detalle-cuenta.module').then( m => m.DetalleCuentaPageModule)
-  },  {
+  },
+  {
     path: 'pedido-mozo-confirma-pago',
     loadChildren: () => import('./pages/pedido-mozo-confirma-pago/pedido-mozo-confirma-pago.module').then( m => m.PedidoMozoConfirmaPagoPageModule)
   },
@@ -94,6 +95,10 @@ const routes: Routes = [
   {
     path: 'producto-edit',
     loadChildren: () => import('./pages/producto-edit/producto-edit.module').then( m => m.ProductoEditPageModule)
+  },
+  {
+    path: 'juegos',
+    loadChildren: () => import('./pages/juegos/juegos.module').then( m => m.JuegosPageModule)
   },
 
 
