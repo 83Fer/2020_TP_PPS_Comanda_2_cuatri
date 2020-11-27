@@ -62,7 +62,6 @@ export class ProductosPage implements OnInit {
 
   async addConcepto() {
     const loading = await this.loadingCtrl.create({
-      message: 'Por favor espere...',
       cssClass: 'custom-loading',
       spinner: null,
       duration: 2000
@@ -73,7 +72,6 @@ export class ProductosPage implements OnInit {
 
   async editConcepto(concepto) {
     const loading = await this.loadingCtrl.create({
-      message: 'Por favor espere...',
       cssClass: 'custom-loading',
       spinner: null,
       duration: 2000

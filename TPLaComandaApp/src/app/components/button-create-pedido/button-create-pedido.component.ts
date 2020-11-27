@@ -57,7 +57,6 @@ export class ButtonCreatePedidoComponent implements OnInit {
 
   async enviarPedido() {
     const loading = await this.loadingCtrl.create({
-      message: 'Por favor espere...',
       cssClass: 'custom-loading',
       spinner: null,
       duration: 2000

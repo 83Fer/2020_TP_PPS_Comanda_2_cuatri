@@ -40,7 +40,6 @@ export class PedidoPage implements OnInit {
 
   async conceptoDetails(docID) {
     const loading = await this.loadingCtrl.create({
-      message: 'Por favor espere...',
       cssClass: 'custom-loading',
       spinner: null,
       duration: 2000

@@ -35,7 +35,6 @@ export class ButtonUpdateEstadoPedidoComponent implements OnInit {
 
   async update() {
     const loading = await this.loadingCtrl.create({
-      message: 'Por favor espere...',
       cssClass: 'custom-loading',
       spinner: null,
       duration: 2000
