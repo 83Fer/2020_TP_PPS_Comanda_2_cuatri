@@ -11,6 +11,7 @@ import { ButtonUpdateEstadoPedidoComponent } from './button-update-estado-pedido
 import { ButtonUpdatePedidoConfirmComponent } from './button-update-pedido-confirm/button-update-pedido-confirm.component';
 import { ButtonUpdatePedidoRecepcionComponent } from './button-update-pedido-recepcion/button-update-pedido-recepcion.component';
 import { ButtonUpdateMozoConfirmaPedidoComponent } from './button-update-mozo-confirma-pedido/button-update-mozo-confirma-pedido.component';
+import { InputCameraImgComponent } from './input-camera-img/input-camera-img.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ButtonUpdateMozoConfirmaPedidoComponent } from './button-update-mozo-co
       ButtonUpdateEstadoPedidoComponent,
       ButtonUpdatePedidoConfirmComponent,
       ButtonUpdatePedidoRecepcionComponent,
-      ButtonUpdateMozoConfirmaPedidoComponent
+      ButtonUpdateMozoConfirmaPedidoComponent,
+      InputCameraImgComponent
     ],
     exports: [
       ButtonFlotatingComponent,
@@ -36,7 +38,8 @@ import { ButtonUpdateMozoConfirmaPedidoComponent } from './button-update-mozo-co
       ButtonUpdateEstadoPedidoComponent,
       ButtonUpdatePedidoConfirmComponent,
       ButtonUpdatePedidoRecepcionComponent,
-      ButtonUpdateMozoConfirmaPedidoComponent
+      ButtonUpdateMozoConfirmaPedidoComponent,
+      InputCameraImgComponent
     ],
     imports: [
         CommonModule,

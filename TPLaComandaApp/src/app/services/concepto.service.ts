@@ -10,6 +10,11 @@ export class ConceptosService {
   conceptos: Concepto[] = [];
   concepto: Concepto;
 
+  tempImages: string[] = [];
+
+  arrayIndex: Array<any> = [];
+
+
   constructor(private afs: AngularFirestore) { }
 
   getConceptos() {
@@ -28,8 +33,11 @@ export class ConceptosService {
     });
   }
 
-  public updateConcepto(documentId: string, data: any) {
-    return this.afs.collection('conceptos').doc(documentId).set(data);
+  updateConcepto(documentId: string, data: any) {
+    return new Promise( resolve => {
+      this.afs.collection('conceptos').doc(documentId).set(data);
+      resolve(true);
+    });
   }
 
 

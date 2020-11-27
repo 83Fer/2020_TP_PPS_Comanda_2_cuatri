@@ -83,6 +83,18 @@ const routes: Routes = [
     path: 'encuesta',
     loadChildren: () => import('./pages/encuesta/encuesta.module').then( m => m.EncuestaPageModule)
   },
+  {
+    path: 'productos',
+    loadChildren: () => import('./pages/productos/productos.module').then( m => m.ProductosPageModule)
+  },
+  {
+    path: 'producto-create',
+    loadChildren: () => import('./pages/producto-create/producto-create.module').then( m => m.ProductoCreatePageModule)
+  },
+  {
+    path: 'producto-edit',
+    loadChildren: () => import('./pages/producto-edit/producto-edit.module').then( m => m.ProductoEditPageModule)
+  },
 
 
 

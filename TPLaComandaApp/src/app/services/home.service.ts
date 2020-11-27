@@ -131,7 +131,7 @@ export class HomeService {
    menuEmpleado() {
      this.empleadoCards = [
       {
-        route: '/producto',
+        route: '/productos',
         title: 'Alta de Producto', // cocinero o bartender
         icon: 'restaurant',
         class: 'icon_5px',

@@ -73,7 +73,9 @@ export class ScannerMesaPage implements OnInit {
       snap.forEach(async (data: any) => {
         const concepto = data.payload.doc.data();
         concepto.docID = data.payload.doc.id;
-        this.conceptosService.conceptos.push(concepto);
+        if (concepto.estado === 'habilitado') {
+          this.conceptosService.conceptos.push(concepto);
+        }
       });
     });
   }
