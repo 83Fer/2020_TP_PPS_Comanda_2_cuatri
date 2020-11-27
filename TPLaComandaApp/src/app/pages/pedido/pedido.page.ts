@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ConceptosService } from '../../services/concepto.service';
 import { PedidosService } from '../../services/pedido.service';
 
@@ -16,7 +16,8 @@ export class PedidoPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     public conceptosService: ConceptosService,
-    public pedidosService: PedidosService
+    public pedidosService: PedidosService,
+    private loadingCtrl: LoadingController
     ) { }
 
   async ngOnInit() {
@@ -37,7 +38,14 @@ export class PedidoPage implements OnInit {
     this.texto = event.detail.value;
   }
 
-  conceptoDetails(docID) {
+  async conceptoDetails(docID) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null,
+      duration: 2000
+    });
+    loading.present();
     this.conceptosService.getConcepto(docID)
     .subscribe((data) => {
       this.conceptosService.concepto = data.payload.data();

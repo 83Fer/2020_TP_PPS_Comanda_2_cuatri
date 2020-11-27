@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../../services/pedido.service';
 import { ToastService } from '../../services/ui-service.service';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { PushNotificationService } from '../../services/push-notification.service';
 import { HomeService } from '../../services/home.service';
@@ -37,7 +37,8 @@ export class ButtonCreatePedidoComponent implements OnInit {
     public pedidosService: PedidosService,
     private navCtrl: NavController,
     private pushNotificationService: PushNotificationService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -55,6 +56,13 @@ export class ButtonCreatePedidoComponent implements OnInit {
   }
 
   async enviarPedido() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null,
+      duration: 2000
+    });
+    loading.present();
     this.pedido.usuarioDocID = this.ngFireAuth.auth.currentUser.uid;
     this.pedido.usuarioNombre = this.homeService.nombre;
     this.pedido.mesaDocID = this.mesaDocID;

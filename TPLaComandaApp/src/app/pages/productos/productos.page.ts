@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ConceptosService } from 'src/app/services/concepto.service';
 import Swal from 'sweetalert2';
 import { HomeService } from '../../services/home.service';
@@ -18,7 +18,8 @@ export class ProductosPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     public conceptosService: ConceptosService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private loadingCtrl: LoadingController
   ) { }
 
   async ngOnInit() {
@@ -59,11 +60,25 @@ export class ProductosPage implements OnInit {
     this.texto = event.detail.value;
   }
 
-  addConcepto() {
+  async addConcepto() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null,
+      duration: 2000
+    });
+    loading.present();
     this.navCtrl.navigateRoot('/producto-create');
   }
 
-  editConcepto(concepto) {
+  async editConcepto(concepto) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null,
+      duration: 2000
+    });
+    loading.present();
     this.conceptosService.concepto = concepto;
     this.conceptosService.arrayIndex = [];
     this.navCtrl.navigateRoot(`/producto-edit`);

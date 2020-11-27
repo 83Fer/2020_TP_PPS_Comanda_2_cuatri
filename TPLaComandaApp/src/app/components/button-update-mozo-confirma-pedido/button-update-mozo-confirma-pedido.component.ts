@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { HomeMesasService } from 'src/app/services/home-mesas.service';
 import { PedidosService } from 'src/app/services/pedido.service';
 import { PushNotificationService } from 'src/app/services/push-notification.service';
@@ -32,7 +32,8 @@ export class ButtonUpdateMozoConfirmaPedidoComponent implements OnInit {
     private navCtrl: NavController,
     private homeMesasService: HomeMesasService,
     private pushNotificationService: PushNotificationService,
-    private asignarMesaService: AsignarMesaService
+    private asignarMesaService: AsignarMesaService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {}
@@ -46,6 +47,13 @@ export class ButtonUpdateMozoConfirmaPedidoComponent implements OnInit {
   }
 
   async update(estado) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null,
+      duration: 2000
+    });
+    loading.present();
     const docID = this.pedidosService.pedido.docID;
 
     console.log(this.pedidosService.pedido);

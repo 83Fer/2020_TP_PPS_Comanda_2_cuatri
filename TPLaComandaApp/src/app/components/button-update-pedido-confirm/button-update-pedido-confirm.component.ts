@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { PedidosService } from 'src/app/services/pedido.service';
 import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { ToastService } from 'src/app/services/ui-service.service';
@@ -27,7 +27,8 @@ export class ButtonUpdatePedidoConfirmComponent implements OnInit {
     private pedidosService: PedidosService,
     private toastService: ToastService,
     private navCtrl: NavController,
-    private pushNotificationService: PushNotificationService
+    private pushNotificationService: PushNotificationService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {}
@@ -41,6 +42,13 @@ export class ButtonUpdatePedidoConfirmComponent implements OnInit {
   }
 
   async update(estado) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null,
+      duration: 2000
+    });
+    loading.present();
     const docID = this.pedidosService.pedido.docID;
 
     this.pedido.usuarioDocID = this.pedidosService.pedido.usuarioDocID;

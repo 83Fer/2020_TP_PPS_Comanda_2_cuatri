@@ -66,9 +66,10 @@ export class ProductoEditPage implements OnInit {
   async editConcepto() {
 
     const loading = await this.loadingCtrl.create({
-      message: 'Por favor espere...'
+      message: 'Por favor espere...',
+      cssClass: 'custom-loading',
+      spinner: null
     });
-
     loading.present();
 
     this.concepto.imgs = [];
