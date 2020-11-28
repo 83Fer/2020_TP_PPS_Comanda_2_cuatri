@@ -46,14 +46,14 @@
 <h3>Iteración 3 07/11 - 14/11</h3>
 
 <strong>Nombre:</strong> Fernando Rivara<br>
-<strong>Tareas:</strong> Se agrega push notifiaction / Manejo de los estados del pedido (mozo, cocinero, bartender) <br>
+<strong>Tareas:</strong> Se agrega push notification / Manejo de los estados del pedido (mozo, cocinero, bartender) <br>
 / Se agrega Menu para los juegos, encuesta y estado del pedido (cliente) / Se agrega vista del pedido (cliente) / ABM de productos(cocinero, bartender) <br><br>
 
 <strong>Nombre:</strong> Franco Rojas<br>
-<strong>Tareas:</strong> Chat de consulta (cliente, mozo) / Solicitar cuenta (cliente) / Creación de spinner<br><br>
+<strong>Tareas:</strong> Chat de consulta (cliente, mozo) / Solicitar cuenta (cliente) / Juegos con descuento (cliente) / Display de spinner <br><br>
 
 <strong>Nombre:</strong> Emiliano Medina<br>
-<strong>Tareas:</strong> Funcionalidad de solicitud de mesas asignadas (Metre) / Encuesta (Cliente) / lista de cuentas pendientes <br><br>
+<strong>Tareas:</strong> Funcionalidad de solicitud de mesas asignadas (Metre) / Encuesta con nivel de satisfacción (Cliente) / Lista de cuentas pendientes (Mozo)/ Cierre y liberación de mesas (Mozo)<br><br>
 
 <h3>Iteración 4 14/11 - 21/11</h3>
 
