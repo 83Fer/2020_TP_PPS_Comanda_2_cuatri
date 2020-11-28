@@ -60,3 +60,10 @@
 <strong>Tareas en equipo:</strong> Acoplar diferentes circuitos y modulos / Pruebas de la app con diferentes escenarios <br>
 / Corrección de bugs <br><br>
 
+
+<h3>Iteración 5 | Final - 21/11 - 28/11 </h3>
+
+<strong>Nombre:</strong> Emiliano Medina<br>
+<strong>Tareas:</strong> Edición del video a evaluar <br><br>
+
+<strong>Tareas en equipo:</strong> Video muestra final de funcionalidades / Corrección de bugs <br>
