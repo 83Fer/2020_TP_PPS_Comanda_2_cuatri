@@ -47,10 +47,10 @@
 
 <strong>Nombre:</strong> Fernando Rivara<br>
 <strong>Tareas:</strong> Se agrega push notifiaction / Manejo de los estados del pedido (mozo, cocinero, bartender) <br>
-/ Se agrega Menu para los juegos, encuesta y estado del pedido (cliente) / Se agrega vista del pedido (cliente) <br><br>
+/ Se agrega Menu para los juegos, encuesta y estado del pedido (cliente) / Se agrega vista del pedido (cliente) / ABM de productos(cocinero, bartender) <br><br>
 
 <strong>Nombre:</strong> Franco Rojas<br>
-<strong>Tareas:</strong> Chat de consulta (cliente, mozo) / Solicitar cuenta (cliente)<br><br>
+<strong>Tareas:</strong> Chat de consulta (cliente, mozo) / Solicitar cuenta (cliente) / Creación de spinner<br><br>
 
 <strong>Nombre:</strong> Emiliano Medina<br>
 <strong>Tareas:</strong> Funcionalidad de solicitud de mesas asignadas (Metre) / Encuesta (Cliente) / lista de cuentas pendientes <br><br>
